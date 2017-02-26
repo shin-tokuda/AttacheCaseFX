@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXSnackbar?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="pane" minHeight="400.0" minWidth="600.0" stylesheets="@p001app.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tokuda.attachecase.gui.p001app.P001AppController">
+   <children>
+      <JFXDrawer fx:id="drawer" style="-fx-background-color: yellow;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <JFXProgressBar fx:id="progress" maxWidth="1.7976931348623157E308" />
+                  <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" />
+               </children>
+            </VBox>
+            <VBox fx:id="sidePane" prefWidth="160.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../image/material_image.jpeg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </JFXDrawer>
+      <JFXHamburger fx:id="burger" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <StackPane fx:id="stack" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXSnackbar fx:id="snack" layoutX="249.0" layoutY="463.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

@@ -1,5 +1,7 @@
 package com.tokuda.attachecase;
 
+import com.jfoenix.controls.JFXSnackbar;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -30,4 +32,9 @@ public class SystemData {
 	 * スタック
 	 */
 	public static StackPane stack;
+
+	/**
+	 * スナックバー
+	 */
+	public static JFXSnackbar snack;
 }

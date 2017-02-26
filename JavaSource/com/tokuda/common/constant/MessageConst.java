@@ -7,6 +7,8 @@ public enum MessageConst {
 	InfoMsg001("フォルダパスを入力"),
 	// InfoMsg002
 	InfoMsg002("対象フォルダを選択してください"),
+	// InfoMsg003
+	InfoMsg003("処理が終了しました"),
 	// ErrMsg001
 	ErrMsg001("必須入力です"),
 	// ErrMsg002

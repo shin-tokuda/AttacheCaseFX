@@ -16,7 +16,8 @@ public class MessageDialog extends JFXDialog {
 		super();
 
 		Label label = new Label(message);
-		label.setStyle("-fx-padding: 10 10 10 10;");
+		label.setStyle("-fx-padding: 20 20 20 20; -fx-background-color: #323232; -fx-text-fill: WHITE;");
+
 		setContent(label);
 	}
 
