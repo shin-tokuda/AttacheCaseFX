@@ -1,4 +1,4 @@
-package com.tokuda.attachecase.gui.p001app;
+package com.tokuda.attachecase.gui.psnl001;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,14 +30,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class P001AppController extends BaseController {
+public class Psnl001Controller extends BaseController {
 
 	// -----------------------------------------------------------------
 	// インスタンス管理
 	// -----------------------------------------------------------------
 
 	static {
-		load(P001AppController.class, "P001App.fxml", "p001app.css");
+		load(Psnl001Controller.class, "Psnl001.fxml", "Psnl001.css");
 	}
 
 	public static BaseController getInstance() {

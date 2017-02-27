@@ -1,18 +1,17 @@
 package com.tokuda.attachecase.gui;
 
 import com.tokuda.attachecase.SystemData;
-import com.tokuda.attachecase.gui.sample.SampleController;
+import com.tokuda.attachecase.gui.main.MainController;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class MainApp extends Application {
+public class Exucute extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
 		SystemData.stage = primaryStage;
-		// P001AppController.getInstance().show();
-		SampleController.getInstance().show();
+		MainController.getInstance().show();
 		// TODO eclipseから起動できなくなるため、一旦コメントアウト
 		// primaryStage.getIcons().add(IconConst.Application.getImage());
 		primaryStage.setTitle("sample");

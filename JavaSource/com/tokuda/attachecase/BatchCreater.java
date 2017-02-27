@@ -38,7 +38,7 @@ public class BatchCreater {
 				writer.println("set toolPath=%~dp0\\");
 				writer.println("set toolClassPath=%toolPath%classes;");
 				writer.println();
-				writer.println("start javaw -cp \"%toolPath%classes;" + builder.toString() + "\" com.tokuda.attachecase.gui.MainApp");
+				writer.println("start javaw -cp \"%toolPath%classes;" + builder.toString() + "\" com.tokuda.attachecase.gui.Execute");
 				writer.println("exit");
 			}
 
