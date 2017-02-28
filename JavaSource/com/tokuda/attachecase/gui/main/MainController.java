@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.tokuda.attachecase.BaseController;
 import com.tokuda.attachecase.SystemData;
@@ -24,11 +25,9 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 public class MainController extends BaseController {
 
@@ -58,13 +57,13 @@ public class MainController extends BaseController {
 	private JFXDrawer drawer;
 
 	@FXML
-	private VBox sidePane;
+	private Pane sidePane;
 
 	@FXML
-	private TabPane tabPane;
+	private JFXTabPane tabPane;
 
 	@FXML
-	private JFXListView menus;
+	private JFXListView<Label> menus;
 
 	@FXML
 	private JFXProgressBar progress;
@@ -82,28 +81,38 @@ public class MainController extends BaseController {
 		SystemData.stack = stack;
 		SystemData.snack = snack;
 
-		drawer.setSidePane(sidePane);
-
 		HamburgerBackArrowBasicTransition burgerTask01 = new HamburgerBackArrowBasicTransition(burger);
 		burgerTask01.setRate(-1);
+
+		drawer.setSidePane(sidePane);
+		drawer.setOnDrawerClosed(handler -> {
+
+			if (burgerTask01.getRate() != -1) {
+				burgerTask01.setRate(-1);
+				burgerTask01.play();
+			}
+		});
+
 		burger.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-			burgerTask01.setRate(burgerTask01.getRate() * -1);
-			burgerTask01.play();
 
 			if (drawer.isShown()) {
+				burgerTask01.setRate(-1);
+				burgerTask01.play();
 				drawer.close();
 			} else {
+				burgerTask01.setRate(1);
+				burgerTask01.play();
 				drawer.open();
 			}
 		});
 
 		for (int i = 1; i <= 10; i++) {
-			menus.getItems().add(new Label("Item " + i));
+			menus.getItems().add(new Label("アイテム " + i));
 		}
 
 		for (int i = 1; i <= 10; i++) {
 			Tab tab = new Tab();
-			tab.setText("test" + i);
+			tab.setText("テスト" + i);
 			tab.setContent(new Label("Content"));
 			tab.setClosable(true);
 			tabPane.getTabs().add(tab);

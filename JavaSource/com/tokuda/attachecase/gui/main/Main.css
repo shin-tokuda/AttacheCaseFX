@@ -1,20 +1,20 @@
+JFXButton {
+	-fx-background-color: #3f51b5;
+	-jfx-button-type: RAISED;
+	-fx-text-fill: white;
+}
+
+JFXHamburger {
+	-fx-background-color: #e8eaf6;
+	-fx-border-color : #9fa8da;
+}
+
 JFXTextField {
 	-jfx-unfocus-color: #3f51b5;
 }
 
 JFXTextArea {
 	-jfx-unfocus-color: #3f51b5;
-}
-
-.JFXButton {
-	-fx-background-color: #3f51b5;
-	-jfx-button-type: RAISED;
-	-fx-text-fill: white;
-}
-
-GridPane {
-	-fx-hgap: 4;
-	-fx-vgap: 4;
 }
 
 Separator {
@@ -27,6 +27,10 @@ Separator {
 
 .jfx-snackbar-toast {
 	-fx-text-fill: white;
+}
+
+.tab-header-background {
+	-fx-background-color: #3f51b5;
 }
 
 .error-msg {

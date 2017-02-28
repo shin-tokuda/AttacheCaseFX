@@ -1,6 +1,7 @@
 package com.tokuda.attachecase;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.tokuda.attachecase.dto.ConfigDTO;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -17,6 +18,11 @@ public class SystemData {
 	 * ベースディレクトリ
 	 */
 	public static String baseDirectory;
+
+	/**
+	 * 設定情報
+	 */
+	public static ConfigDTO config;
 
 	/**
 	 * ステージ
