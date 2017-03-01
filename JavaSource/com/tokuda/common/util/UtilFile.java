@@ -11,6 +11,8 @@ import java.io.OutputStreamWriter;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
+import javafx.scene.image.Image;
+
 /**
  * Created by s-tokuda on 2017/03/01.
  */
@@ -92,5 +94,23 @@ public class UtilFile {
 	 */
 	public static BufferedWriter getBufferedWriter(File file, String charSet) throws IOException {
 		return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charSet));
+	}
+
+	/**
+	 * 画像ファイルを取得します。
+	 *
+	 * @param imagePath
+	 *            画像ファイルパス
+	 * @return 画像ファイル
+	 */
+	public static Image getImage(final String imagePath) {
+		Image result = null;
+
+		try {
+			result = new Image(Thread.currentThread().getContextClassLoader().getResource(imagePath).openStream());
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return result;
 	}
 }

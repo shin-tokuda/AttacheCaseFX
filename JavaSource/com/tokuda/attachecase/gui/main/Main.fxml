@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXSnackbar?>
 <?import com.jfoenix.controls.JFXTabPane?>
@@ -10,6 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -30,10 +30,10 @@
                <children>
                   <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../image/material_image.jpeg" />
+                        <Image url="@../../../../../resource/image/material_image.jpeg" />
                      </image>
                   </ImageView>
-                  <JFXListView fx:id="menus" maxWidth="200.0" minWidth="200.0" />
+                  <Pane fx:id="menus" maxWidth="200.0" minWidth="200.0" />
                </children>
             </VBox>
          </children>
