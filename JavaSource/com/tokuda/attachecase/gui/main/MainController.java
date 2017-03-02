@@ -8,6 +8,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
@@ -17,24 +18,22 @@ import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.tokuda.attachecase.BaseController;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.dialog.MessageSnackBar;
-import com.tokuda.attachecase.jfx.MenuItem;
+import com.tokuda.attachecase.jfx.MenuItemBox;
 import com.tokuda.common.constant.MessageConst;
 import com.tokuda.common.util.UtilMessage;
 
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -57,11 +56,30 @@ public class MainController extends BaseController {
 	// GUI管理
 	// -----------------------------------------------------------------
 
+	private double xOffset = 0;
+
+	private double yOffset = 0;
+
 	@FXML
 	private Pane pane;
 
 	@FXML
+	private GridPane headerBar;
+
+	@FXML
 	private JFXHamburger burger;
+
+	@FXML
+	private Label appTitle;
+
+	@FXML
+	private JFXButton resizeButton;
+
+	@FXML
+	private JFXButton hideButton;
+
+	@FXML
+	private JFXButton closeButton;
 
 	@FXML
 	private JFXDrawer drawer;
@@ -91,6 +109,8 @@ public class MainController extends BaseController {
 		SystemData.stack = stack;
 		SystemData.snack = snack;
 
+		appTitle.setText(SystemData.config.getTitle());
+
 		HamburgerBackArrowBasicTransition burgerTask01 = new HamburgerBackArrowBasicTransition(burger);
 		burgerTask01.setRate(-1);
 
@@ -116,6 +136,34 @@ public class MainController extends BaseController {
 			}
 		});
 
+		headerBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xOffset = event.getSceneX();
+				yOffset = event.getSceneY();
+			}
+		});
+
+		headerBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				SystemData.stage.setX(event.getScreenX() - xOffset);
+				SystemData.stage.setY(event.getScreenY() - yOffset);
+			}
+		});
+
+		resizeButton.setOnAction(event -> {
+			SystemData.stage.setMaximized(!SystemData.stage.isMaximized());
+		});
+
+		hideButton.setOnAction(event -> {
+			SystemData.stage.setIconified(true);
+		});
+
+		closeButton.setOnAction(event -> {
+			SystemData.stage.close();
+		});
+
 		// メニュー生成
 		createMenu2();
 
@@ -139,55 +187,29 @@ public class MainController extends BaseController {
 
 		VBox createList = new VBox();
 		SystemData.config.getApplications().stream().forEach(app -> {
-			MenuItem item = createMenuItem(app.getTitle(), null, new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN), event -> {
+			createList.getChildren().add(new MenuItemBox(app.getTitle(), null, new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN), event -> {
 				new MessageSnackBar(app.getTitle()).show();
-			});
-			createList.getChildren().add(item);
+			}));
 		});
 		accordion.getPanes().add(new TitledPane("新規作成", createList));
 
 		VBox fileList = new VBox();
-		fileList.getChildren().add(createMenuItem("開く", null, new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN), event -> {
+		fileList.getChildren().add(new MenuItemBox("開く", null, new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN), event -> {
 			new MessageSnackBar("開く").show();
 		}));
-		fileList.getChildren().add(createMenuItem("保存", null, new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN), event -> {
+		fileList.getChildren().add(new MenuItemBox("保存", null, new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN), event -> {
 			new MessageSnackBar("開く").show();
 		}));
 		fileList.getChildren()
-				.add(createMenuItem("名前を付けて保存", null, new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN), event -> {
+				.add(new MenuItemBox("名前を付けて保存", null, new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN), event -> {
 					new MessageSnackBar("名前を付けて保存").show();
 				}));
-		fileList.getChildren().add(createMenuItem("閉じる", null, new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN), event -> {
+		fileList.getChildren().add(new MenuItemBox("閉じる", null, new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN), event -> {
 			new MessageSnackBar("閉じる").show();
 		}));
 		accordion.getPanes().add(new TitledPane("ファイル", fileList));
 
 		menus.getChildren().add(accordion);
-	}
-
-	private MenuItem createMenuItem(final String label, final ImageView image, final KeyCodeCombination accelerator, EventHandler<ActionEvent> handler) {
-		MenuItem result = new MenuItem();
-		result.setCursor(Cursor.HAND);
-		result.setPrefWidth(200);
-		result.setAccelerator(accelerator);
-		// result.setOnAction(handler);
-		result.setOnAction(event -> {
-			System.out.println("あれ？");
-		});
-
-		Pane empty = new Pane();
-		empty.setPrefWidth(30);
-
-		Label title = new Label(label);
-		title.setPrefWidth(110);
-
-		Label shortcut = new Label(accelerator.getDisplayText());
-		shortcut.setPrefWidth(60);
-
-		result.getChildren().add(empty);
-		result.getChildren().add(title);
-		result.getChildren().add(shortcut);
-		return result;
 	}
 
 	// -----------------------------------------------------------------

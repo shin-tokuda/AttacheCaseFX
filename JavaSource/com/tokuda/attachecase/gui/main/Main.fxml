@@ -1,29 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXSnackbar?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="pane" minHeight="400.0" minWidth="600.0" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tokuda.attachecase.gui.main.MainController">
+<GridPane fx:id="pane" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tokuda.attachecase.gui.main.MainController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane fx:id="headerBar" maxWidth="1.7976931348623157E308" styleClass="header_bar">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="80.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXHamburger fx:id="burger" prefHeight="30.0" prefWidth="30.0">
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding>
+            </JFXHamburger>
+            <Label fx:id="appTitle" text="Label" GridPane.columnIndex="1" />
+            <JFXButton fx:id="resizeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="□" GridPane.columnIndex="2" />
+            <JFXButton fx:id="hideButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="_" GridPane.columnIndex="3" />
+            <JFXButton fx:id="closeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="×" GridPane.columnIndex="4" />
+         </children>
+      </GridPane>
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" maxWidth="1.7976931348623157E308" styleClass="contents" GridPane.rowIndex="1">
          <children>
             <VBox>
                <children>
-                  <JFXProgressBar fx:id="progress" maxWidth="1.7976931348623157E308" />
                   <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE">
                      <VBox.margin>
-                        <Insets left="50.0" />
-                     </VBox.margin></JFXTabPane>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXTabPane>
                </children>
             </VBox>
             <VBox fx:id="sidePane" prefHeight="200.0" prefWidth="100.0">
@@ -38,11 +75,8 @@
             </VBox>
          </children>
       </JFXDrawer>
-      <JFXHamburger fx:id="burger" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="8.0">
-         <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-         </padding></JFXHamburger>
-      <StackPane fx:id="stack" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <JFXSnackbar fx:id="snack" layoutX="249.0" layoutY="463.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXProgressBar fx:id="progress" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" GridPane.rowIndex="2" />
+      <StackPane fx:id="stack" visible="false" GridPane.rowIndex="3" />
+      <JFXSnackbar fx:id="snack" GridPane.rowIndex="4" />
    </children>
-</AnchorPane>
+</GridPane>

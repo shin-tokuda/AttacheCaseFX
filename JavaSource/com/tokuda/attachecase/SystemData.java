@@ -1,6 +1,7 @@
 package com.tokuda.attachecase;
 
 import com.jfoenix.controls.JFXSnackbar;
+import com.tokuda.attachecase.dto.ColorPatternDTO01;
 import com.tokuda.attachecase.dto.ConfigDTO;
 
 import javafx.scene.layout.Pane;
@@ -23,6 +24,11 @@ public class SystemData {
 	 * 設定情報
 	 */
 	public static ConfigDTO config;
+
+	/**
+	 * カラーパターン
+	 */
+	public static ColorPatternDTO01 colorPattern;
 
 	/**
 	 * ステージ

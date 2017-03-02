@@ -1,4 +1,7 @@
 {
+	"app_name" : "アタッシュケース",
+	"initial_width" : "600",
+	"initial_height" : "400",
 	"applications" : [
 		{
 			"app_id" : "sample",
