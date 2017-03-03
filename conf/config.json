@@ -1,18 +1,15 @@
 {
 	"app_name" : "アタッシュケース",
-	"initial_width" : "600",
-	"initial_height" : "400",
 	"applications" : [
 		{
-			"app_id" : "sample",
+			"app_id" : "Sample",
 			"title" : "サンプル",
-			"icon" : "./image/16x16/edit.png",
+			"icon" : "image/16x16/edit.png",
 			"extension" : "acfx0"
 		},
 		{
-			"app_id" : "psnl001",
+			"app_id" : "Psnl001",
 			"title" : "個人サンプル",
-			"icon" : "./image/16x16/edit.png",
 			"extension" : "acfx1"
 		}
 	],

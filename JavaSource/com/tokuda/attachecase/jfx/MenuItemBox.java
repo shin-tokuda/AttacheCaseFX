@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.Skin;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -27,29 +28,42 @@ import lombok.Setter;
 @SuppressWarnings("restriction")
 public class MenuItemBox extends HBox {
 
-	public MenuItemBox(final String label, final ImageView image, final KeyCodeCombination accelerator, final EventHandler<ActionEvent> handler) {
+	public MenuItemBox(final String label, final Image image, final KeyCodeCombination accelerator, final EventHandler<ActionEvent> handler) {
 		super();
 
 		setCursor(Cursor.HAND);
 		setPrefWidth(200);
-		addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-			handler.handle(new ActionEvent());
-		});
 
-		Pane empty = new Pane();
-		empty.setPrefWidth(30);
+		Pane imagePane = new Pane();
+		imagePane.setPrefWidth(30);
 
 		MenuLabel title = new MenuLabel(label);
 		title.setPrefWidth(110);
-		title.setAccelerator(accelerator);
-		title.setOnAction(handler);
 
-		Label shortcut = new Label(accelerator.getDisplayText());
+		Label shortcut = new Label();
 		shortcut.setPrefWidth(60);
 
-		getChildren().add(empty);
+		getChildren().add(imagePane);
 		getChildren().add(title);
 		getChildren().add(shortcut);
+
+		if (image != null) {
+			ImageView imageView = new ImageView();
+			imageView.setImage(image);
+			imagePane.getChildren().add(imageView);
+		}
+
+		if (handler != null) {
+			addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+				handler.handle(new ActionEvent());
+			});
+			title.setOnAction(handler);
+		}
+
+		if (accelerator != null) {
+			title.setAccelerator(accelerator);
+			shortcut.setText(accelerator.getDisplayText());
+		}
 	}
 
 	/**

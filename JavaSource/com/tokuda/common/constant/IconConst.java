@@ -7,23 +7,23 @@ import lombok.Getter;
 
 public enum IconConst {
 	// アプリケーションアイコン
-	Application(UtilFile.getImage("resource/image/24x24/briefcase.png")),
+	Application(UtilFile.getImage("image/24x24/briefcase.png")),
 	// フルスクリーンアイコン
-	FullResize(UtilFile.getImage("resource/image/16x16/application-resize-full.png")),
+	FullResize(UtilFile.getImage("image/16x16/application-resize-full.png")),
 	// ターミナルアイコン
-	Terminal(UtilFile.getImage("resource/image/16x16/application-terminal.png")),
+	Terminal(UtilFile.getImage("image/16x16/application-terminal.png")),
 	// トレイアイコン
-	Tray(UtilFile.getImage("resource/image/16x16/briefcase.png")),
+	Tray(UtilFile.getImage("image/16x16/briefcase.png")),
 	// ファイルオープンアイコン
-	FileOpen(UtilFile.getImage("resource/image/16x16/folder-horizontal-open.png")),
+	FileOpen(UtilFile.getImage("image/16x16/folder-horizontal-open.png")),
 	// ファイル保存アイコン
-	FileSave(UtilFile.getImage("resource/image/16x16/disk-black.png")),
+	FileSave(UtilFile.getImage("image/16x16/disk-black.png")),
 	// ファイルクローズアイコン
-	FileClose(UtilFile.getImage("resource/image/16x16/minus-circle-frame.png")),
+	FileClose(UtilFile.getImage("image/16x16/minus-circle-frame.png")),
 	// ドキュメントアイコン
-	Document(UtilFile.getImage("resource/image/16x16/document-search-result.png")),
+	Document(UtilFile.getImage("image/16x16/document-search-result.png")),
 	// ディレクトリアイコン
-	Directory(UtilFile.getImage("resource/image/16x16/folder-search-result.png"));
+	Directory(UtilFile.getImage("image/16x16/folder-search-result.png"));
 
 	@Getter
 	private Image image;

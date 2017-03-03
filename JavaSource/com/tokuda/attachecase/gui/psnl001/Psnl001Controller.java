@@ -37,7 +37,7 @@ public class Psnl001Controller extends BaseController {
 	// -----------------------------------------------------------------
 
 	static {
-		load(Psnl001Controller.class, "Psnl001.fxml", "Psnl001.css");
+		load(Psnl001Controller.class);
 	}
 
 	public static BaseController getInstance() {

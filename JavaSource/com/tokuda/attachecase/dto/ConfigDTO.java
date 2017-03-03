@@ -19,12 +19,6 @@ public class ConfigDTO {
 	@JsonProperty("app_name")
 	private String title;
 
-	@JsonProperty("initial_width")
-	private int initialWidth;
-
-	@JsonProperty("initial_height")
-	private int initialHeight;
-
 	@JsonProperty("applications")
 	private List<ApplicationDTO> applications;
 

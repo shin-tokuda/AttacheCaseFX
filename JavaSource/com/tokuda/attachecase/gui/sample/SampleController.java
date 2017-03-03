@@ -40,7 +40,7 @@ public class SampleController extends BaseController {
 	// -----------------------------------------------------------------
 
 	static {
-		load(SampleController.class, "Sample.fxml", "sample.css");
+		load(SampleController.class);
 	}
 
 	public static BaseController getInstance() {

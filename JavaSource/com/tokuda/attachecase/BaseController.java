@@ -27,9 +27,13 @@ public abstract class BaseController {
 	 *
 	 * @param fxmlLoader
 	 */
-	public static void load(final Class<?> cls, final String fxmlName, final String cssName) {
+	public static void load(final Class<?> cls) {
 
 		try {
+			final String clsName = cls.getSimpleName();
+			final String fxmlName = clsName.substring(0, clsName.lastIndexOf("Controller")) + ".fxml";
+			final String cssName = clsName.substring(0, clsName.lastIndexOf("Controller")) + ".css";
+
 			FXMLLoader fxmlLoader = new FXMLLoader(cls.getResource(fxmlName));
 			fxmlLoader.load();
 			scene = new Scene(fxmlLoader.getRoot());

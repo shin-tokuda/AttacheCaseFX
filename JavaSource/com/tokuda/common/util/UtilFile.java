@@ -106,10 +106,13 @@ public class UtilFile {
 	public static Image getImage(final String imagePath) {
 		Image result = null;
 
-		try {
-			result = new Image(Thread.currentThread().getContextClassLoader().getResource(imagePath).openStream());
-		} catch (IOException ex) {
-			ex.printStackTrace();
+		if (imagePath != null) {
+
+			try {
+				result = new Image(Thread.currentThread().getContextClassLoader().getResource("resource/" + imagePath).openStream());
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 		return result;
 	}
