@@ -11,16 +11,15 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXProgressBar;
-import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
-import com.tokuda.attachecase.BaseController;
+import com.tokuda.attachecase.ControllerManager;
+import com.tokuda.attachecase.DefaultController;
 import com.tokuda.attachecase.SystemData;
-import com.tokuda.attachecase.constant.StyleClassConst;
+import com.tokuda.attachecase.constant.StyleClass;
 import com.tokuda.attachecase.dialog.MessageDialog;
-import com.tokuda.attachecase.dialog.MessageSnackBar;
+import com.tokuda.attachecase.gui.main.MainController;
 import com.tokuda.common.constant.ItemConst;
 import com.tokuda.common.constant.MessageConst;
 import com.tokuda.common.util.UtilMessage;
@@ -30,22 +29,11 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import lombok.Getter;
 
-public class SampleController extends BaseController {
-
-	// -----------------------------------------------------------------
-	// インスタンス管理
-	// -----------------------------------------------------------------
-
-	static {
-		load(SampleController.class);
-	}
-
-	public static BaseController getInstance() {
-		return instance;
-	}
+@Getter
+public class SampleController extends DefaultController {
 
 	// -----------------------------------------------------------------
 	// GUI管理
@@ -53,12 +41,6 @@ public class SampleController extends BaseController {
 
 	@FXML
 	private Pane pane;
-
-	@FXML
-	private StackPane stack;
-
-	@FXML
-	private JFXSnackbar snack;
 
 	@FXML
 	private JFXTextField text01;
@@ -73,14 +55,8 @@ public class SampleController extends BaseController {
 	private JFXButton button02;
 
 	@FXML
-	private JFXProgressBar progress;
-
-	@FXML
 	public void initialize() {
-		snack.registerSnackbarContainer(pane);
-		SystemData.pane = pane;
-		SystemData.stack = stack;
-		SystemData.snack = snack;
+		MainController main = ControllerManager.getController(MainController.class);
 
 		text01.setPromptText(UtilMessage.build(MessageConst.InfoMsg001));
 		button01.setText(ItemConst.Item001.getValue());
@@ -88,7 +64,7 @@ public class SampleController extends BaseController {
 
 		RequiredFieldValidator validator = new RequiredFieldValidator();
 		validator.setMessage(UtilMessage.build(MessageConst.ErrMsg001));
-		validator.setErrorStyleClass(StyleClassConst.ErrorMsg.getValue());
+		validator.setErrorStyleClass(StyleClass.ErrorMsg.getValue());
 		text01.getValidators().add(validator);
 		text01.focusedProperty().addListener((o, oldVal, newVal) -> {
 			if (!newVal) {
@@ -96,12 +72,11 @@ public class SampleController extends BaseController {
 			}
 		});
 
-		progress.setProgress(0);
+		main.getProgress().setProgress(0);
 	}
 
 	@FXML
 	public void onClickButton01(ActionEvent event) {
-		// DirectoryChooser chooser = new DirectoryChooser();
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle(UtilMessage.build(MessageConst.InfoMsg002));
 		File directory = chooser.showOpenDialog(SystemData.stage);
@@ -116,10 +91,11 @@ public class SampleController extends BaseController {
 
 	@FXML
 	public void onClickButton02(ActionEvent event) {
+		MainController main = ControllerManager.getController(MainController.class);
 
 		if (!UtilString.isEmpty(text01.getText()) && Files.exists(Paths.get(text01.getText()))) {
 			task01 = new Task01(new File(text01.getText()));
-			progress.progressProperty().bind(task01.progressProperty());
+			main.getProgress().progressProperty().bind(task01.progressProperty());
 			new Thread(task01).start();
 		}
 	}
@@ -149,7 +125,7 @@ public class SampleController extends BaseController {
 				ex.printStackTrace();
 			}
 			updateProgress(3, max);
-			new MessageSnackBar(UtilMessage.build(MessageConst.InfoMsg003)).show();
+			new MessageDialog(UtilMessage.build(MessageConst.InfoMsg003)).show();
 			return null;
 		}
 	};

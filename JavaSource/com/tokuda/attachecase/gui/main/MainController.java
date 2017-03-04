@@ -1,13 +1,5 @@
 package com.tokuda.attachecase.gui.main;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -15,18 +7,17 @@ import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
-import com.tokuda.attachecase.BaseController;
+import com.tokuda.attachecase.ControllerManager;
+import com.tokuda.attachecase.SingletonController;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.dialog.MessageSnackBar;
 import com.tokuda.attachecase.jfx.MenuItemBox;
-import com.tokuda.common.constant.MessageConst;
 import com.tokuda.common.util.UtilFile;
-import com.tokuda.common.util.UtilMessage;
 
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.KeyCode;
@@ -38,20 +29,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import lombok.Getter;
 
-public class MainController extends BaseController {
-
-	// -----------------------------------------------------------------
-	// インスタンス管理
-	// -----------------------------------------------------------------
-
-	static {
-		load(MainController.class);
-	}
-
-	public static BaseController getInstance() {
-		return instance;
-	}
+@Getter
+public class MainController extends SingletonController {
 
 	// -----------------------------------------------------------------
 	// GUI管理
@@ -106,9 +87,6 @@ public class MainController extends BaseController {
 	@FXML
 	public void initialize() {
 		snack.registerSnackbarContainer(pane);
-		SystemData.pane = pane;
-		SystemData.stack = stack;
-		SystemData.snack = snack;
 
 		appTitle.setText(SystemData.config.getTitle());
 
@@ -176,23 +154,14 @@ public class MainController extends BaseController {
 		});
 
 		// メニュー生成
-		createMenu2();
-
-		for (int i = 1; i <= 10; i++) {
-			Tab tab = new Tab();
-			tab.setText("テスト" + i);
-			tab.setContent(new Label("Content"));
-			tab.setClosable(true);
-			tabPane.getTabs().add(tab);
-		}
+		createMenu();
 		progress.setProgress(0);
 	}
 
 	/**
 	 * メニューを生成します。
 	 */
-	private void createMenu2() {
-
+	private void createMenu() {
 		Accordion accordion = new Accordion();
 		accordion.setPrefWidth(200);
 
@@ -202,14 +171,12 @@ public class MainController extends BaseController {
 		SystemData.config.getApplications().stream().forEach(app -> {
 			createList.getChildren().add(new MenuItemBox(app.getTitle(), UtilFile.getImage(app.getIcon()), null, event -> {
 
-				// try {
-				// Class.forName("com.tokuda.attachecase.gui." +
-				// app.getAppId().toLowerCase() + "." + app.getAppId() +
-				// "Controller").getInstance();
-				// } catch (ClassNotFoundException | InstantiationException |
-				// IllegalAccessException ex) {
-				// ex.printStackTrace();
-				// }
+				try {
+					ControllerManager.load(Class.forName("com.tokuda.attachecase.gui." + app.getAppId().toLowerCase() + "." + app.getAppId() + "Controller"),
+							tabPane);
+				} catch (ClassNotFoundException ex) {
+					ex.printStackTrace();
+				}
 				new MessageSnackBar(app.getTitle()).show();
 			}));
 		});
@@ -232,40 +199,14 @@ public class MainController extends BaseController {
 				}));
 
 		fileList.getChildren().add(new MenuItemBox("閉じる", null, new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN), event -> {
-			new MessageSnackBar("閉じる").show();
+
+			if (!tabPane.getTabs().isEmpty()) {
+				SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+				tabPane.getTabs().remove(selectionModel.getSelectedIndex());
+			}
 		}));
 		accordion.getPanes().add(new TitledPane("ファイル", fileList));
 
 		menus.getChildren().add(accordion);
 	}
-
-	// -----------------------------------------------------------------
-	// タスク管理
-	// -----------------------------------------------------------------
-
-	private Task01 task01;
-
-	private class Task01 extends Task<Void> {
-
-		private File directory;
-
-		public Task01(final File directory) {
-			this.directory = directory;
-		}
-
-		@Override
-		public Void call() {
-			final int max = 3;
-			updateProgress(1, max);
-
-			try (Workbook book = WorkbookFactory.create(directory)) {
-				updateProgress(2, max);
-			} catch (EncryptedDocumentException | InvalidFormatException | IOException ex) {
-				ex.printStackTrace();
-			}
-			updateProgress(3, max);
-			new MessageSnackBar(UtilMessage.build(MessageConst.InfoMsg003)).show();
-			return null;
-		}
-	};
 }

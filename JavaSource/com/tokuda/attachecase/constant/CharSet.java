@@ -2,7 +2,7 @@ package com.tokuda.attachecase.constant;
 
 import lombok.Getter;
 
-public enum CharSetConst {
+public enum CharSet {
 	// Shift_JIS
 	ShiftJIS("Shift_JIS"),
 	// UTF-8
@@ -16,7 +16,7 @@ public enum CharSetConst {
 	 *
 	 * @param value
 	 */
-	private CharSetConst(final String value) {
+	private CharSet(final String value) {
 		this.value = value;
 	}
 }

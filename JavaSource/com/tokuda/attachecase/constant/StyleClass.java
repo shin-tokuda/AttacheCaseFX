@@ -2,7 +2,7 @@ package com.tokuda.attachecase.constant;
 
 import lombok.Getter;
 
-public enum StyleClassConst {
+public enum StyleClass {
 	// error-msg
 	ErrorMsg("error-msg");
 
@@ -14,7 +14,7 @@ public enum StyleClassConst {
 	 *
 	 * @param value
 	 */
-	private StyleClassConst(final String value) {
+	private StyleClass(final String value) {
 		this.value = value;
 	}
 }

@@ -1,12 +1,9 @@
 package com.tokuda.attachecase;
 
-import com.jfoenix.controls.JFXSnackbar;
 import com.tokuda.attachecase.dto.ColorPatternDTO01;
 import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.attachecase.dto.SettingDTO;
 
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -40,19 +37,4 @@ public class SystemData {
 	 * ステージ
 	 */
 	public static Stage stage;
-
-	/**
-	 * ペイン
-	 */
-	public static Pane pane;
-
-	/**
-	 * スタック
-	 */
-	public static StackPane stack;
-
-	/**
-	 * スナックバー
-	 */
-	public static JFXSnackbar snack;
 }

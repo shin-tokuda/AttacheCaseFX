@@ -1,34 +1,3 @@
-JFXTextField {
-	-jfx-unfocus-color: #3f51b5;
-}
-
-JFXTextArea {
-	-jfx-unfocus-color: #3f51b5;
-}
-
-.JFXButton {
-	-fx-background-color: #3f51b5;
-	-jfx-button-type: RAISED;
-	-fx-text-fill: white;
-}
-
-GridPane {
-	-fx-hgap: 4;
-	-fx-vgap: 4;
-}
-
-Separator {
-	-fx-background-color: #3f51b5;
-}
-
-.jfx-snackbar-content {
-	-fx-background-color: #323232;
-}
-
-.jfx-snackbar-toast {
-	-fx-text-fill: white;
-}
-
-.error-msg {
-	-fx-text-fill: red;
+.root {
+	-fx-background-color: red;
 }

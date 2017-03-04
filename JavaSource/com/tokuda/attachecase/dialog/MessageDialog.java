@@ -1,7 +1,8 @@
 package com.tokuda.attachecase.dialog;
 
 import com.jfoenix.controls.JFXDialog;
-import com.tokuda.attachecase.SystemData;
+import com.tokuda.attachecase.ControllerManager;
+import com.tokuda.attachecase.gui.main.MainController;
 
 import javafx.scene.control.Label;
 
@@ -25,15 +26,17 @@ public class MessageDialog extends JFXDialog {
 	 * メッセージダイアログを表示します。
 	 */
 	public void show() {
-		SystemData.stack.setVisible(true);
-		SystemData.pane.setDisable(true);
-		super.show(SystemData.stack);
+		MainController main = ControllerManager.getController(MainController.class);
+		main.getStack().setVisible(true);
+		main.getPane().setDisable(true);
+		super.show(main.getStack());
 	}
 
 	@Override
 	public void close() {
 		super.close();
-		SystemData.stack.setVisible(false);
-		SystemData.pane.setDisable(false);
+		MainController main = ControllerManager.getController(MainController.class);
+		main.getStack().setVisible(false);
+		main.getPane().setDisable(false);
 	}
 }

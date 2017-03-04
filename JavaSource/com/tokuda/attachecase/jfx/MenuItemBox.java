@@ -17,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
@@ -54,9 +53,9 @@ public class MenuItemBox extends HBox {
 		}
 
 		if (handler != null) {
-			addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-				handler.handle(new ActionEvent());
-			});
+			// addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			// handler.handle(new ActionEvent());
+			// });
 			title.setOnAction(handler);
 		}
 

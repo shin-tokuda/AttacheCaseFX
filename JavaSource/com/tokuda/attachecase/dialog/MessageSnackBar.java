@@ -1,8 +1,14 @@
 package com.tokuda.attachecase.dialog;
 
 import com.jfoenix.controls.JFXSnackbar.SnackbarEvent;
-import com.tokuda.attachecase.SystemData;
+import com.tokuda.attachecase.ControllerManager;
+import com.tokuda.attachecase.gui.main.MainController;
 
+/**
+ * 注意！！スレッドからの呼び出しはできません。
+ *
+ * @author s-tokuda
+ */
 public class MessageSnackBar {
 
 	private final String message;
@@ -20,6 +26,7 @@ public class MessageSnackBar {
 	 * メッセージスナックバーを表示します。
 	 */
 	public void show() {
-		SystemData.snack.fireEvent(new SnackbarEvent(message));
+		MainController main = ControllerManager.getController(MainController.class);
+		main.getSnack().fireEvent(new SnackbarEvent(message));
 	}
 }

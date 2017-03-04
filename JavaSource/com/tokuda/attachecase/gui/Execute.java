@@ -5,8 +5,9 @@ import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.tokuda.attachecase.ControllerManager;
 import com.tokuda.attachecase.SystemData;
-import com.tokuda.attachecase.constant.CharSetConst;
+import com.tokuda.attachecase.constant.CharSet;
 import com.tokuda.attachecase.dto.ColorPatternDTO01;
 import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.attachecase.dto.SettingDTO;
@@ -39,7 +40,7 @@ public class Execute extends Application {
 		}
 
 		SystemData.stage = primaryStage;
-		MainController.getInstance().show();
+		ControllerManager.load(MainController.class, primaryStage);
 		ResizeHelper.addResizeListener(primaryStage);
 		primaryStage.setTitle(SystemData.config.getTitle());
 		primaryStage.getIcons().add(IconConst.Application.getImage());
@@ -57,7 +58,7 @@ public class Execute extends Application {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.enable(SerializationFeature.INDENT_OUTPUT);
-			mapper.writeValue(UtilFile.getBufferedWriter(Paths.get("conf", "setting.json").toFile(), CharSetConst.Utf8.getValue()), SystemData.setting);
+			mapper.writeValue(UtilFile.getBufferedWriter(Paths.get("conf", "setting.json").toFile(), CharSet.Utf8.getValue()), SystemData.setting);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
