@@ -20,6 +20,7 @@ public class BatchCreater {
 	private static final List<String> PATHS = new ArrayList<String>();
 
 	public static void main(String[] args) {
+		System.out.println(BatchCreater.class.getName() + " is start.");
 
 		try {
 			setPaths();
@@ -45,6 +46,7 @@ public class BatchCreater {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		System.out.println(BatchCreater.class.getName() + " is end.");
 	}
 
 	private static void setPaths() throws IOException {
