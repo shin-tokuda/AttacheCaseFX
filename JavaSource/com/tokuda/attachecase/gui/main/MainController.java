@@ -1,5 +1,9 @@
 package com.tokuda.attachecase.gui.main;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -7,12 +11,18 @@ import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
-import com.tokuda.attachecase.ControllerManager;
-import com.tokuda.attachecase.SingletonController;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.dialog.MessageSnackBar;
+import com.tokuda.attachecase.dto.ApplicationDTO;
+import com.tokuda.attachecase.gui.BaseController;
+import com.tokuda.attachecase.gui.BaseSaveDTO;
+import com.tokuda.attachecase.gui.ControllerManager;
+import com.tokuda.attachecase.gui.SingletonController;
 import com.tokuda.attachecase.jfx.MenuItemBox;
+import com.tokuda.common.constant.MessageConst;
 import com.tokuda.common.util.UtilFile;
+import com.tokuda.common.util.UtilMessage;
+import com.tokuda.common.util.UtilString;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
@@ -29,10 +39,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import lombok.Getter;
 
 @Getter
-public class MainController extends SingletonController {
+public class MainController extends SingletonController<BaseSaveDTO> {
 
 	// -----------------------------------------------------------------
 	// GUI管理
@@ -41,6 +52,10 @@ public class MainController extends SingletonController {
 	private double xOffset = 0;
 
 	private double yOffset = 0;
+
+	private List<BaseController<BaseSaveDTO>> applications = new ArrayList<>();
+
+	private List<File> saveFiles = new ArrayList<>();
 
 	@FXML
 	private Pane pane;
@@ -94,6 +109,8 @@ public class MainController extends SingletonController {
 		burgerTask01.setRate(-1);
 
 		drawer.setSidePane(sidePane);
+		drawer.open();
+		drawer.close();
 		drawer.setOnDrawerClosed(handler -> {
 
 			if (burgerTask01.getRate() != -1) {
@@ -172,8 +189,10 @@ public class MainController extends SingletonController {
 			createList.getChildren().add(new MenuItemBox(app.getTitle(), UtilFile.getImage(app.getIcon()), null, event -> {
 
 				try {
-					ControllerManager.load(Class.forName("com.tokuda.attachecase.gui." + app.getAppId().toLowerCase() + "." + app.getAppId() + "Controller"),
-							tabPane);
+					BaseController<BaseSaveDTO> controller = ControllerManager
+							.load(Class.forName("com.tokuda.attachecase.gui." + app.getAppId().toLowerCase() + "." + app.getAppId() + "Controller"), tabPane);
+					applications.add(controller);
+					saveFiles.add(null);
 				} catch (ClassNotFoundException ex) {
 					ex.printStackTrace();
 				}
@@ -186,27 +205,80 @@ public class MainController extends SingletonController {
 
 		VBox fileList = new VBox();
 		fileList.getChildren().add(new MenuItemBox("開く", null, new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN), event -> {
-			new MessageSnackBar("開く").show();
+			FileChooser chooser = new FileChooser();
+			chooser.setTitle(UtilMessage.build(MessageConst.InfoMsg003));
+			File file = chooser.showOpenDialog(SystemData.stage);
+
+			if (file != null && file.exists()) {
+				String extension = file.getName().substring(file.getName().lastIndexOf('.') + 1);
+
+				for (ApplicationDTO app : SystemData.config.getApplications()) {
+
+					if (UtilString.cnvNull(app.getExtension()).equals(extension)) {
+
+						try {
+							BaseController<BaseSaveDTO> controller = ControllerManager.load(
+									Class.forName("com.tokuda.attachecase.gui." + app.getAppId().toLowerCase() + "." + app.getAppId() + "Controller"), tabPane);
+							controller.open(file);
+							applications.add(controller);
+							saveFiles.add(file);
+						} catch (ClassNotFoundException ex) {
+							ex.printStackTrace();
+						}
+						break;
+					}
+				}
+			}
 		}));
 
 		fileList.getChildren().add(new MenuItemBox("保存", null, new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN), event -> {
-			new MessageSnackBar("開く").show();
+
+			if (!tabPane.getTabs().isEmpty()) {
+				SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+				BaseController<BaseSaveDTO> controller = applications.get(selectionModel.getSelectedIndex());
+				File file = saveFiles.get(selectionModel.getSelectedIndex());
+
+				if (file != null) {
+					file = controller.save(file);
+				} else {
+					file = controller.save();
+				}
+				saveFiles.remove(selectionModel.getSelectedIndex());
+				saveFiles.add(selectionModel.getSelectedIndex(), file);
+			}
 		}));
 
 		fileList.getChildren()
 				.add(new MenuItemBox("名前を付けて保存", null, new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN), event -> {
-					new MessageSnackBar("名前を付けて保存").show();
+
+					if (!tabPane.getTabs().isEmpty()) {
+						SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+						BaseController<BaseSaveDTO> controller = applications.get(selectionModel.getSelectedIndex());
+						File file = controller.save();
+						saveFiles.remove(selectionModel.getSelectedIndex());
+						saveFiles.add(selectionModel.getSelectedIndex(), file);
+					}
 				}));
 
 		fileList.getChildren().add(new MenuItemBox("閉じる", null, new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN), event -> {
 
 			if (!tabPane.getTabs().isEmpty()) {
 				SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+				applications.remove(selectionModel.getSelectedIndex());
+				saveFiles.remove(selectionModel.getSelectedIndex());
 				tabPane.getTabs().remove(selectionModel.getSelectedIndex());
 			}
 		}));
 		accordion.getPanes().add(new TitledPane("ファイル", fileList));
 
 		menus.getChildren().add(accordion);
+	}
+
+	@Override
+	public void open(final File file) {
+	}
+
+	@Override
+	protected void preSave() {
 	}
 }

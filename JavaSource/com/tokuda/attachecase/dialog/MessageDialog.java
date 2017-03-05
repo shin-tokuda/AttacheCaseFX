@@ -1,7 +1,7 @@
 package com.tokuda.attachecase.dialog;
 
 import com.jfoenix.controls.JFXDialog;
-import com.tokuda.attachecase.ControllerManager;
+import com.tokuda.attachecase.gui.ControllerManager;
 import com.tokuda.attachecase.gui.main.MainController;
 
 import javafx.scene.control.Label;

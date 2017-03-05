@@ -1,7 +1,7 @@
 package com.tokuda.attachecase.dialog;
 
 import com.jfoenix.controls.JFXSnackbar.SnackbarEvent;
-import com.tokuda.attachecase.ControllerManager;
+import com.tokuda.attachecase.gui.ControllerManager;
 import com.tokuda.attachecase.gui.main.MainController;
 
 /**

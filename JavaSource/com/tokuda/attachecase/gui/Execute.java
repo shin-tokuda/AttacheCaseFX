@@ -5,7 +5,6 @@ import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.tokuda.attachecase.ControllerManager;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.constant.CharSet;
 import com.tokuda.attachecase.dto.ColorPatternDTO01;

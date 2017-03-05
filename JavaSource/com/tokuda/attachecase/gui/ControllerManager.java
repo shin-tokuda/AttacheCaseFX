@@ -1,8 +1,9 @@
-package com.tokuda.attachecase;
+package com.tokuda.attachecase.gui;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.dto.ApplicationDTO;
 
 import javafx.fxml.FXMLLoader;
@@ -26,7 +27,7 @@ public class ControllerManager {
 		});
 	}
 
-	public static <T extends BaseController> T getController(final Class<?> cls) {
+	public static <T extends BaseController<?>> T getController(final Class<?> cls) {
 		final String key = cls.getName();
 		return (T) singletonControllers.get(key);
 	}
@@ -39,7 +40,7 @@ public class ControllerManager {
 	 * @param stage
 	 *            ロード先ステージ
 	 */
-	public static <T extends BaseController> T load(final Class<?> cls, final Stage stage) {
+	public static <T extends BaseController<?>> T load(final Class<?> cls, final Stage stage) {
 		return load(cls, stage, null);
 	}
 
@@ -51,7 +52,7 @@ public class ControllerManager {
 	 * @param parent
 	 *            ロード先ノード
 	 */
-	public static <T extends BaseController> T load(final Class<?> cls, final Parent parent) {
+	public static <T extends BaseController<?>> T load(final Class<?> cls, final Parent parent) {
 		return load(cls, null, parent);
 	}
 
@@ -65,7 +66,7 @@ public class ControllerManager {
 	 * @param parent
 	 *            ロード先ノード
 	 */
-	private static <T extends BaseController> T load(final Class<?> cls, final Stage stage, final Parent parent) {
+	private static <T extends BaseController<?>> T load(final Class<?> cls, final Stage stage, final Parent parent) {
 		T result = null;
 
 		final String key = cls.getName();
@@ -79,6 +80,14 @@ public class ControllerManager {
 				FXMLLoader fxmlLoader = new FXMLLoader(cls.getResource(fxmlName));
 				fxmlLoader.load();
 				result = fxmlLoader.getController();
+
+				for (ApplicationDTO app : SystemData.config.getApplications()) {
+
+					if (app.getAppId().equals(clsName.substring(0, clsName.lastIndexOf("Controller")))) {
+						result.setAppDTO(app);
+						break;
+					}
+				}
 
 				if (stage != null) {
 					Scene scene = new Scene(fxmlLoader.getRoot());

@@ -14,11 +14,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
-import com.tokuda.attachecase.ControllerManager;
-import com.tokuda.attachecase.DefaultController;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.constant.StyleClass;
 import com.tokuda.attachecase.dialog.MessageDialog;
+import com.tokuda.attachecase.gui.ControllerManager;
+import com.tokuda.attachecase.gui.DefaultController;
 import com.tokuda.attachecase.gui.main.MainController;
 import com.tokuda.common.constant.ItemConst;
 import com.tokuda.common.constant.MessageConst;
@@ -33,7 +33,7 @@ import javafx.stage.FileChooser;
 import lombok.Getter;
 
 @Getter
-public class SampleController extends DefaultController {
+public class SampleController extends DefaultController<SampleSaveDTO> {
 
 	// -----------------------------------------------------------------
 	// GUI管理
@@ -71,7 +71,6 @@ public class SampleController extends DefaultController {
 				text01.validate();
 			}
 		});
-
 		main.getProgress().setProgress(0);
 	}
 
@@ -98,6 +97,21 @@ public class SampleController extends DefaultController {
 			main.getProgress().progressProperty().bind(task01.progressProperty());
 			new Thread(task01).start();
 		}
+	}
+
+	@Override
+	public void open(final File file) {
+		SampleSaveDTO saveDTO = open(file, SampleSaveDTO.class);
+
+		if (saveDTO != null) {
+			text01.setText(saveDTO.getText01());
+			text02.setText(saveDTO.getText02());
+		}
+	}
+
+	@Override
+	protected void preSave() {
+		setSaveDTO(new SampleSaveDTO(text01.getText(), text02.getText()));
 	}
 
 	// -----------------------------------------------------------------
