@@ -17,8 +17,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,16 +31,16 @@ public class MenuItemBox extends HBox {
 		super();
 
 		setCursor(Cursor.HAND);
-		setPrefWidth(200);
+		setPrefWidth(300);
 
-		Pane imagePane = new Pane();
+		BorderPane imagePane = new BorderPane();
 		imagePane.setPrefWidth(30);
 
 		MenuLabel title = new MenuLabel(label);
-		title.setPrefWidth(110);
+		title.setPrefWidth(170);
 
 		Label shortcut = new Label();
-		shortcut.setPrefWidth(60);
+		shortcut.setPrefWidth(100);
 
 		getChildren().add(imagePane);
 		getChildren().add(title);
@@ -49,7 +49,7 @@ public class MenuItemBox extends HBox {
 		if (image != null) {
 			ImageView imageView = new ImageView();
 			imageView.setImage(image);
-			imagePane.getChildren().add(imageView);
+			imagePane.setCenter(imageView);
 		}
 
 		if (handler != null) {
@@ -63,6 +63,14 @@ public class MenuItemBox extends HBox {
 			title.setAccelerator(accelerator);
 			shortcut.setText(accelerator.getDisplayText());
 		}
+
+		this.setOnMouseEntered(event -> {
+			setStyle("-fx-background-color: #F5F5F5;");
+		});
+
+		this.setOnMouseExited(event -> {
+			setStyle("-fx-background-color:transparent;");
+		});
 	}
 
 	/**

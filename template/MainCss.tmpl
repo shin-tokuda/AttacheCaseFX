@@ -4,18 +4,21 @@
 
 .root {
 	-fx-border-color : {@200};
+	-fx-font-family: "Meiryo";
 }
 
 /* ---------------------------------------------
 ヘッダーエリア
 --------------------------------------------- */
 
-.header_bar {
-	-fx-background-color: {@500};
+#appTitle {
+	-fx-font-size: 16;
+	-fx-text-fill: {@white};
+	-fx-padding: 0 0 0 4;
 }
 
-.header_bar Label {
-	-fx-text-fill: {@white};
+.header_bar {
+	-fx-background-color: {@500};
 }
 
 .header_bar JFXHamburger StackPane {
@@ -30,9 +33,22 @@
 コンテンツエリア
 --------------------------------------------- */
 
+#menus VBox {
+	-fx-background-color: {@white};
+	-fx-padding: 0;
+}
+
+#menus MenuItemBox {
+	-fx-padding: 8;
+}
+
+#menus MenuItemBox BorderPane {
+	-fx-padding: 0 4 0 0;
+}
+
 .contents JFXButton {
 	-fx-background-color: {@500};
-	-jfx-button-type: RAISED;
+	-jfx-button-type: FLAT;
 	-fx-text-fill: {@white};
 }
 

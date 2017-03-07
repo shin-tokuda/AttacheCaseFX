@@ -57,26 +57,23 @@ public class AutomaticGeneration {
 
 						String line;
 						while ((line = reader.readLine()) != null) {
-
-							if (!UtilString.isEmpty(line)) {
-								line = line.replace("{@50}", pattern.getP50());
-								line = line.replace("{@100}", pattern.getP100());
-								line = line.replace("{@200}", pattern.getP200());
-								line = line.replace("{@300}", pattern.getP300());
-								line = line.replace("{@400}", pattern.getP400());
-								line = line.replace("{@500}", pattern.getP500());
-								line = line.replace("{@600}", pattern.getP600());
-								line = line.replace("{@700}", pattern.getP700());
-								line = line.replace("{@800}", pattern.getP800());
-								line = line.replace("{@900}", pattern.getP900());
-								line = line.replace("{@A100}", pattern.getPa100());
-								line = line.replace("{@A200}", pattern.getPa200());
-								line = line.replace("{@A400}", pattern.getPa400());
-								line = line.replace("{@A700}", pattern.getPa700());
-								line = line.replace("{@black}", black.getP500());
-								line = line.replace("{@white}", white.getP500());
-								writer.println(line);
-							}
+							line = line.replace("{@50}", pattern.getP50());
+							line = line.replace("{@100}", pattern.getP100());
+							line = line.replace("{@200}", pattern.getP200());
+							line = line.replace("{@300}", pattern.getP300());
+							line = line.replace("{@400}", pattern.getP400());
+							line = line.replace("{@500}", pattern.getP500());
+							line = line.replace("{@600}", pattern.getP600());
+							line = line.replace("{@700}", pattern.getP700());
+							line = line.replace("{@800}", pattern.getP800());
+							line = line.replace("{@900}", pattern.getP900());
+							line = line.replace("{@A100}", pattern.getPa100());
+							line = line.replace("{@A200}", pattern.getPa200());
+							line = line.replace("{@A400}", pattern.getPa400());
+							line = line.replace("{@A700}", pattern.getPa700());
+							line = line.replace("{@black}", black.getP500());
+							line = line.replace("{@white}", white.getP500());
+							writer.println(line);
 						}
 					}
 				}

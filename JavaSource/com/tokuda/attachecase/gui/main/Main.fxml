@@ -18,10 +18,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tokuda.attachecase.gui.main.MainController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tokuda.attachecase.gui.main.MainController">
    <children>
-      <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <GridPane fx:id="headerBar" maxWidth="1.7976931348623157E308" prefHeight="30.0" styleClass="header_bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
@@ -46,17 +45,17 @@
                   <JFXButton fx:id="closeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="×" GridPane.columnIndex="4" />
                </children>
             </GridPane>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                <children>
                   <JFXTabPane fx:id="tabPane" styleClass="contents" tabClosingPolicy="UNAVAILABLE" />
-                  <VBox fx:id="sidePane" prefWidth="200.0">
+                  <VBox fx:id="sidePane" prefWidth="300.0">
                      <children>
-                        <ImageView fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="60.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../resource/image/material_image.jpeg" />
                            </image>
                         </ImageView>
-                        <Pane fx:id="menus" maxWidth="200.0" minWidth="200.0" />
+                        <Pane fx:id="menus" minWidth="-Infinity" prefWidth="300.0" />
                      </children>
                   </VBox>
                </children>

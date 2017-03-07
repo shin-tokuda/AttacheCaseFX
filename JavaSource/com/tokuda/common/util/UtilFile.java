@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import org.mozilla.universalchardet.UniversalDetector;
 
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 
 /**
  * Created by s-tokuda on 2017/03/01.
@@ -110,6 +111,27 @@ public class UtilFile {
 
 			try {
 				result = new Image(Thread.currentThread().getContextClassLoader().getResource("resource/" + imagePath).openStream());
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * フォントをロードします。
+	 *
+	 * @param fontPath
+	 *            フォントファイルパス
+	 * @return フォント
+	 */
+	public static Font loadFont(final String fontPath) {
+		Font result = null;
+
+		if (fontPath != null) {
+
+			try {
+				result = Font.loadFont(Thread.currentThread().getContextClassLoader().getResource("resource/" + fontPath).openStream(), 0);
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}

@@ -180,7 +180,7 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 	 */
 	private void createMenu() {
 		Accordion accordion = new Accordion();
-		accordion.setPrefWidth(200);
+		accordion.setPrefWidth(300);
 
 		// 新規作成メニューの設定
 
