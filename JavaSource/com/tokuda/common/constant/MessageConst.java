@@ -13,12 +13,14 @@ public enum MessageConst {
 	InfoMsg004("対象フォルダを選択してください"),
 	// InfoMsg003
 	InfoMsg005("処理が終了しました"),
+	// InfoMsg006
+	InfoMsg006("処理を中断しました"),
 	// ErrMsg001
 	ErrMsg001("必須入力です"),
 	// ErrMsg002
 	ErrMsg002("必須選択です"),
 	// ErrMsg003
-	ErrMsg003("エラーが発生しました");
+	ErrMsg003("処理が異常終了しました");
 
 	@Getter
 	private String value;

@@ -6,6 +6,11 @@ import com.tokuda.attachecase.gui.main.MainController;
 
 import javafx.scene.control.Label;
 
+/**
+ * メッセージダイアログ表示クラス
+ *
+ * @author s-tokuda
+ */
 public class MessageDialog extends JFXDialog {
 
 	/**
@@ -32,6 +37,9 @@ public class MessageDialog extends JFXDialog {
 		super.show(main.getStack());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void close() {
 		super.close();

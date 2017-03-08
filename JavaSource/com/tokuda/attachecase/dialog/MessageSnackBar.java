@@ -5,7 +5,7 @@ import com.tokuda.attachecase.gui.ControllerManager;
 import com.tokuda.attachecase.gui.main.MainController;
 
 /**
- * 注意！！スレッドからの呼び出しはできません。
+ * メッセージスナックバー表示クラス
  *
  * @author s-tokuda
  */

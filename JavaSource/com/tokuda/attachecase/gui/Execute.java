@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.constant.CharSet;
-import com.tokuda.attachecase.dto.ColorPatternDTO01;
+import com.tokuda.attachecase.dto.ColorPatternDTO;
 import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.attachecase.dto.SettingDTO;
 import com.tokuda.attachecase.gui.main.MainController;
@@ -32,7 +32,7 @@ public class Execute extends Application {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.enable(SerializationFeature.INDENT_OUTPUT);
 			SystemData.config = mapper.readValue(Paths.get("conf", "config.json").toFile(), ConfigDTO.class);
-			SystemData.colorPattern = mapper.readValue(Paths.get("conf", "color_pattern.json").toFile(), ColorPatternDTO01.class);
+			SystemData.colorPattern = mapper.readValue(Paths.get("conf", "color_pattern.json").toFile(), ColorPatternDTO.class);
 			SystemData.setting = mapper.readValue(Paths.get("conf", "setting.json").toFile(), SettingDTO.class);
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -51,8 +51,11 @@ public class Execute extends Application {
 
 	@Override
 	public void stop() {
-		SystemData.setting.setInitialWidth(SystemData.stage.getWidth());
-		SystemData.setting.setInitialHeight(SystemData.stage.getHeight());
+
+		if (!SystemData.stage.isMaximized()) {
+			SystemData.setting.setInitialWidth(SystemData.stage.getWidth());
+			SystemData.setting.setInitialHeight(SystemData.stage.getHeight());
+		}
 
 		try {
 			ObjectMapper mapper = new ObjectMapper();

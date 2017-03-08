@@ -12,9 +12,10 @@
 --------------------------------------------- */
 
 #appTitle {
-	-fx-font-size: 16;
+	-fx-font-size: 20;
+	-fx-font-family: "Arial";
 	-fx-text-fill: #FFFFFF;
-	-fx-padding: 0 0 0 4;
+	-fx-padding: 0 0 0 8;
 }
 
 .header_bar {
@@ -32,6 +33,13 @@
 /* ---------------------------------------------
 コンテンツエリア
 --------------------------------------------- */
+
+.sideTitle {
+	-fx-font-size: 32px;
+	-fx-font-family: "Arial Black";
+	-fx-fill: #9E9E9E;
+	-fx-effect: innershadow(three-pass-box , rgba(0, 0, 0, 0.7) , 6, 0.0 , 0 , 2);
+}
 
 #menus VBox {
 	-fx-background-color: #FFFFFF;
@@ -53,10 +61,12 @@
 }
 
 .contents JFXTextField {
+	-jfx-focus-color: #3F51B5;
 	-jfx-unfocus-color: #3F51B5;
 }
 
 .contents JFXTextArea {
+	-jfx-focus-color: #3F51B5;
 	-jfx-unfocus-color: #3F51B5;
 }
 

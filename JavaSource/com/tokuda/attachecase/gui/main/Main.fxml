@@ -50,11 +50,16 @@
                   <JFXTabPane fx:id="tabPane" styleClass="contents" tabClosingPolicy="UNAVAILABLE" />
                   <VBox fx:id="sidePane" prefWidth="300.0">
                      <children>
-                        <ImageView fitHeight="60.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../resource/image/material_image.jpeg" />
-                           </image>
-                        </ImageView>
+                        <AnchorPane prefHeight="60.0" prefWidth="300.0">
+                           <children>
+                              <ImageView fitHeight="60.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../resource/image/material_image.jpeg" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="sideTitle" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="sideTitle" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                         <Pane fx:id="menus" minWidth="-Infinity" prefWidth="300.0" />
                      </children>
                   </VBox>

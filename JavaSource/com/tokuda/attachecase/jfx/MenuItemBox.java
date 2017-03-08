@@ -34,13 +34,13 @@ public class MenuItemBox extends HBox {
 		setPrefWidth(300);
 
 		BorderPane imagePane = new BorderPane();
-		imagePane.setPrefWidth(30);
+		imagePane.setPrefWidth(40);
 
 		MenuLabel title = new MenuLabel(label);
-		title.setPrefWidth(170);
+		title.setWrapText(true);
 
 		Label shortcut = new Label();
-		shortcut.setPrefWidth(100);
+		shortcut.setWrapText(true);
 
 		getChildren().add(imagePane);
 		getChildren().add(title);
@@ -49,6 +49,8 @@ public class MenuItemBox extends HBox {
 		if (image != null) {
 			ImageView imageView = new ImageView();
 			imageView.setImage(image);
+			imageView.setFitWidth(24);
+			imageView.setFitHeight(24);
 			imagePane.setCenter(imageView);
 		}
 
@@ -62,6 +64,12 @@ public class MenuItemBox extends HBox {
 		if (accelerator != null) {
 			title.setAccelerator(accelerator);
 			shortcut.setText(accelerator.getDisplayText());
+
+			title.setPrefWidth(170);
+			shortcut.setPrefWidth(90);
+		} else {
+			title.setPrefWidth(260);
+			shortcut.setPrefWidth(0);
 		}
 
 		this.setOnMouseEntered(event -> {
@@ -81,9 +89,8 @@ public class MenuItemBox extends HBox {
 	private class MenuLabel extends Label {
 
 		/**
-		 * The action handler associated with this text field, or <tt>null</tt>
-		 * if no action handler is assigned. The action handler is normally
-		 * called when the user types the ENTER key.
+		 * The action handler associated with this text field, or <tt>null</tt> if no action handler is assigned. The action handler is normally called when the
+		 * user types the ENTER key.
 		 */
 		private final ObjectProperty<EventHandler<ActionEvent>> onAction = new ObjectPropertyBase<EventHandler<ActionEvent>>() {
 
@@ -116,9 +123,7 @@ public class MenuItemBox extends HBox {
 		}
 
 		/**
-		 * The accelerator property enables accessing the associated action in
-		 * one keystroke. It is a convenience offered to perform quickly a given
-		 * action.
+		 * The accelerator property enables accessing the associated action in one keystroke. It is a convenience offered to perform quickly a given action.
 		 */
 		private ObjectProperty<KeyCombination> accelerator;
 
@@ -158,8 +163,7 @@ public class MenuItemBox extends HBox {
 		/**
 		 * Initialize with {@link MenuLabel}.
 		 *
-		 * @param label
-		 *            {@link MenuLabel}
+		 * @param label {@link MenuLabel}
 		 */
 		public MenuLabelSkin(final MenuLabel label) {
 			super(label, new BehaviorBase<>(label, Collections.emptyList()));

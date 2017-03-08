@@ -13,12 +13,13 @@ import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.dialog.MessageSnackBar;
-import com.tokuda.attachecase.dto.ApplicationDTO;
+import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.attachecase.gui.BaseController;
 import com.tokuda.attachecase.gui.BaseSaveDTO;
 import com.tokuda.attachecase.gui.ControllerManager;
 import com.tokuda.attachecase.gui.SingletonController;
 import com.tokuda.attachecase.jfx.MenuItemBox;
+import com.tokuda.common.constant.IconConst;
 import com.tokuda.common.constant.MessageConst;
 import com.tokuda.common.util.UtilFile;
 import com.tokuda.common.util.UtilMessage;
@@ -30,6 +31,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -85,6 +87,9 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 	private Pane sidePane;
 
 	@FXML
+	private Label sideTitle;
+
+	@FXML
 	private JFXTabPane tabPane;
 
 	@FXML
@@ -103,7 +108,13 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 	public void initialize() {
 		snack.registerSnackbarContainer(pane);
 
+		ImageView appImage = new ImageView(IconConst.AttacheCase.getImage());
+		appImage.setFitWidth(24);
+		appImage.setFitHeight(24);
+
 		appTitle.setText(SystemData.config.getTitle());
+		appTitle.setGraphic(appImage);
+		sideTitle.setText(SystemData.config.getTitle());
 
 		HamburgerBackArrowBasicTransition burgerTask01 = new HamburgerBackArrowBasicTransition(burger);
 		burgerTask01.setRate(-1);
@@ -204,52 +215,55 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 		// ファイルメニューの設定
 
 		VBox fileList = new VBox();
-		fileList.getChildren().add(new MenuItemBox("開く", null, new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN), event -> {
-			FileChooser chooser = new FileChooser();
-			chooser.setTitle(UtilMessage.build(MessageConst.InfoMsg003));
-			File file = chooser.showOpenDialog(SystemData.stage);
+		fileList.getChildren()
+				.add(new MenuItemBox("開く", IconConst.FileOpen.getImage(), new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN), event -> {
+					FileChooser chooser = new FileChooser();
+					chooser.setTitle(UtilMessage.build(MessageConst.InfoMsg003));
+					File file = chooser.showOpenDialog(SystemData.stage);
 
-			if (file != null && file.exists()) {
-				String extension = file.getName().substring(file.getName().lastIndexOf('.') + 1);
+					if (file != null && file.exists()) {
+						String extension = file.getName().substring(file.getName().lastIndexOf('.') + 1);
 
-				for (ApplicationDTO app : SystemData.config.getApplications()) {
+						for (ConfigDTO.ApplicationDTO app : SystemData.config.getApplications()) {
 
-					if (UtilString.cnvNull(app.getExtension()).equals(extension)) {
+							if (UtilString.cnvNull(app.getExtension()).equals(extension)) {
 
-						try {
-							BaseController<BaseSaveDTO> controller = ControllerManager.load(
-									Class.forName("com.tokuda.attachecase.gui." + app.getAppId().toLowerCase() + "." + app.getAppId() + "Controller"), tabPane);
-							controller.open(file);
-							applications.add(controller);
-							saveFiles.add(file);
-						} catch (ClassNotFoundException ex) {
-							ex.printStackTrace();
+								try {
+									BaseController<BaseSaveDTO> controller = ControllerManager.load(
+											Class.forName("com.tokuda.attachecase.gui." + app.getAppId().toLowerCase() + "." + app.getAppId() + "Controller"),
+											tabPane);
+									controller.open(file);
+									applications.add(controller);
+									saveFiles.add(file);
+								} catch (ClassNotFoundException ex) {
+									ex.printStackTrace();
+								}
+								break;
+							}
 						}
-						break;
 					}
-				}
-			}
-		}));
-
-		fileList.getChildren().add(new MenuItemBox("保存", null, new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN), event -> {
-
-			if (!tabPane.getTabs().isEmpty()) {
-				SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
-				BaseController<BaseSaveDTO> controller = applications.get(selectionModel.getSelectedIndex());
-				File file = saveFiles.get(selectionModel.getSelectedIndex());
-
-				if (file != null) {
-					file = controller.save(file);
-				} else {
-					file = controller.save();
-				}
-				saveFiles.remove(selectionModel.getSelectedIndex());
-				saveFiles.add(selectionModel.getSelectedIndex(), file);
-			}
-		}));
+				}));
 
 		fileList.getChildren()
-				.add(new MenuItemBox("名前を付けて保存", null, new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN), event -> {
+				.add(new MenuItemBox("保存", IconConst.FileSave.getImage(), new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN), event -> {
+
+					if (!tabPane.getTabs().isEmpty()) {
+						SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+						BaseController<BaseSaveDTO> controller = applications.get(selectionModel.getSelectedIndex());
+						File file = saveFiles.get(selectionModel.getSelectedIndex());
+
+						if (file != null) {
+							file = controller.save(file);
+						} else {
+							file = controller.save();
+						}
+						saveFiles.remove(selectionModel.getSelectedIndex());
+						saveFiles.add(selectionModel.getSelectedIndex(), file);
+					}
+				}));
+
+		fileList.getChildren().add(new MenuItemBox("名前を付けて保存", IconConst.FileSave.getImage(),
+				new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN), event -> {
 
 					if (!tabPane.getTabs().isEmpty()) {
 						SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
@@ -260,15 +274,16 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 					}
 				}));
 
-		fileList.getChildren().add(new MenuItemBox("閉じる", null, new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN), event -> {
+		fileList.getChildren()
+				.add(new MenuItemBox("閉じる", IconConst.FileClose.getImage(), new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN), event -> {
 
-			if (!tabPane.getTabs().isEmpty()) {
-				SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
-				applications.remove(selectionModel.getSelectedIndex());
-				saveFiles.remove(selectionModel.getSelectedIndex());
-				tabPane.getTabs().remove(selectionModel.getSelectedIndex());
-			}
-		}));
+					if (!tabPane.getTabs().isEmpty()) {
+						SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+						applications.remove(selectionModel.getSelectedIndex());
+						saveFiles.remove(selectionModel.getSelectedIndex());
+						tabPane.getTabs().remove(selectionModel.getSelectedIndex());
+					}
+				}));
 		accordion.getPanes().add(new TitledPane("ファイル", fileList));
 
 		menus.getChildren().add(accordion);

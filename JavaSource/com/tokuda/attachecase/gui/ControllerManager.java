@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.tokuda.attachecase.SystemData;
-import com.tokuda.attachecase.dto.ApplicationDTO;
+import com.tokuda.attachecase.dto.ConfigDTO;
+import com.tokuda.attachecase.dto.ConfigDTO.ApplicationDTO;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +16,14 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * コントローラー管理クラス
+ *
+ * @author s-tokuda
+ */
 public class ControllerManager {
 
-	private static final Map<String, ApplicationDTO> applications = new HashMap<>();
+	private static final Map<String, ConfigDTO.ApplicationDTO> applications = new HashMap<>();
 
 	private static final Map<String, Object> singletonControllers = new HashMap<>();
 
@@ -35,10 +41,8 @@ public class ControllerManager {
 	/**
 	 * GUIをロードする
 	 *
-	 * @param cls
-	 *            クラス
-	 * @param stage
-	 *            ロード先ステージ
+	 * @param cls クラス
+	 * @param stage ロード先ステージ
 	 */
 	public static <T extends BaseController<?>> T load(final Class<?> cls, final Stage stage) {
 		return load(cls, stage, null);
@@ -47,10 +51,8 @@ public class ControllerManager {
 	/**
 	 * GUIをロードする
 	 *
-	 * @param cls
-	 *            クラス
-	 * @param parent
-	 *            ロード先ノード
+	 * @param cls クラス
+	 * @param parent ロード先ノード
 	 */
 	public static <T extends BaseController<?>> T load(final Class<?> cls, final Parent parent) {
 		return load(cls, null, parent);
@@ -59,12 +61,9 @@ public class ControllerManager {
 	/**
 	 * GUIをロードする
 	 *
-	 * @param cls
-	 *            クラス
-	 * @param stage
-	 *            ロード先ステージ
-	 * @param parent
-	 *            ロード先ノード
+	 * @param cls クラス
+	 * @param stage ロード先ステージ
+	 * @param parent ロード先ノード
 	 */
 	private static <T extends BaseController<?>> T load(final Class<?> cls, final Stage stage, final Parent parent) {
 		T result = null;

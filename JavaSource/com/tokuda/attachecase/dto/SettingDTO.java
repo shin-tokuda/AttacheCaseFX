@@ -19,4 +19,7 @@ public class SettingDTO {
 
 	@JsonProperty("initial_height")
 	private double initialHeight;
+
+	@JsonProperty("color_pattern")
+	private String colorPattern;
 }

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.constant.CharSet;
 import com.tokuda.attachecase.dialog.MessageSnackBar;
-import com.tokuda.attachecase.dto.ApplicationDTO;
+import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.common.constant.MessageConst;
 import com.tokuda.common.util.UtilFile;
 import com.tokuda.common.util.UtilMessage;
@@ -19,7 +19,7 @@ import lombok.Setter;
 public abstract class BaseController<T extends BaseSaveDTO> {
 
 	@Setter
-	protected ApplicationDTO appDTO;
+	protected ConfigDTO.ApplicationDTO appDTO;
 
 	private T _saveDTO;
 

@@ -7,23 +7,25 @@ import lombok.Getter;
 
 public enum IconConst {
 	// アプリケーションアイコン
-	Application(UtilFile.getImage("image/24x24/briefcase.png")),
+	Application(UtilFile.getImage("image/briefcase.png")),
+	// アタッシュケースアイコン
+	AttacheCase(UtilFile.getImage("image/ic_work_white_24dp_2x.png")),
 	// フルスクリーンアイコン
-	FullResize(UtilFile.getImage("image/16x16/application-resize-full.png")),
+	FullResize(UtilFile.getImage("image/ic_zoom_out_map_black_24dp_2x.png")),
 	// ターミナルアイコン
-	Terminal(UtilFile.getImage("image/16x16/application-terminal.png")),
+	Terminal(UtilFile.getImage("image/ic_keyboard_black_24dp_2x.png")),
 	// トレイアイコン
-	Tray(UtilFile.getImage("image/16x16/briefcase.png")),
+	Tray(UtilFile.getImage("image/briefcase.png")),
 	// ファイルオープンアイコン
-	FileOpen(UtilFile.getImage("image/16x16/folder-horizontal-open.png")),
+	FileOpen(UtilFile.getImage("image/ic_insert_drive_file_black_24dp_2x.png")),
 	// ファイル保存アイコン
-	FileSave(UtilFile.getImage("image/16x16/disk-black.png")),
+	FileSave(UtilFile.getImage("image/ic_save_black_24dp_2x.png")),
 	// ファイルクローズアイコン
-	FileClose(UtilFile.getImage("image/16x16/minus-circle-frame.png")),
+	FileClose(UtilFile.getImage("image/ic_remove_circle_black_24dp_2x.png")),
 	// ドキュメントアイコン
-	Document(UtilFile.getImage("image/16x16/document-search-result.png")),
+	Document(UtilFile.getImage("image/ic_library_books_black_24dp_2x.png")),
 	// ディレクトリアイコン
-	Directory(UtilFile.getImage("image/16x16/folder-search-result.png"));
+	Directory(UtilFile.getImage("image/ic_search_black_24dp_2x.png"));
 
 	@Getter
 	private Image image;

@@ -1,15 +1,18 @@
 {
-	"app_name" : "アタッシュケース",
+	"app_name" : "Attache Case",
 	"applications" : [
 		{
 			"app_id" : "Sample",
 			"title" : "サンプル",
-			"icon" : "image/16x16/edit.png",
+			"icon" : "image/ic_keyboard_black_24dp_2x.png",
+			"icon_color" : "",
 			"extension" : "acfx0"
 		},
 		{
 			"app_id" : "Psnl001",
 			"title" : "個人サンプル",
+			"icon" : "image/ic_spellcheck_black_24dp_2x.png",
+			"icon_color" : "",
 			"extension" : "acfx1"
 		}
 	],

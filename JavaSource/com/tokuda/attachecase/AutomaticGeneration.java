@@ -8,8 +8,8 @@ import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.tokuda.attachecase.dto.ColorPatternDTO01;
-import com.tokuda.attachecase.dto.ColorPatternDTO02;
+import com.tokuda.attachecase.dto.ColorPatternDTO;
+import com.tokuda.attachecase.dto.SettingDTO;
 import com.tokuda.common.util.UtilFile;
 import com.tokuda.common.util.UtilString;
 
@@ -26,20 +26,22 @@ public class AutomaticGeneration {
 		File mainCssTmplFile = Paths.get("template", "MainCss.tmpl").toFile();
 		File mainCssFile = Paths.get("JavaSource/com/tokuda/attachecase/gui/main/Main.css").toFile();
 
-		ColorPatternDTO01 colorPattern = null;
+		ColorPatternDTO colorPattern = null;
+		SettingDTO setting = null;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.enable(SerializationFeature.INDENT_OUTPUT);
-			colorPattern = mapper.readValue(Paths.get("conf", "color_pattern.json").toFile(), ColorPatternDTO01.class);
+			colorPattern = mapper.readValue(Paths.get("conf", "color_pattern.json").toFile(), ColorPatternDTO.class);
+			setting = mapper.readValue(Paths.get("conf", "setting.json").toFile(), SettingDTO.class);
 
 			if (colorPattern != null) {
-				ColorPatternDTO02 pattern = null;
-				ColorPatternDTO02 black = null;
-				ColorPatternDTO02 white = null;
+				ColorPatternDTO.PatternDTO pattern = null;
+				ColorPatternDTO.PatternDTO black = null;
+				ColorPatternDTO.PatternDTO white = null;
 
-				for (ColorPatternDTO02 dto : colorPattern.getPatterns()) {
+				for (ColorPatternDTO.PatternDTO dto : colorPattern.getPatterns()) {
 
-					if (UtilString.cnvNull(dto.getPattern()).equals(colorPattern.getSelected())) {
+					if (UtilString.cnvNull(dto.getPattern()).equals(setting.getColorPattern())) {
 						pattern = dto;
 					}
 					if (UtilString.cnvNull(dto.getPattern()).equals("Black")) {

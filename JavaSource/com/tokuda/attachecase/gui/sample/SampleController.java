@@ -19,13 +19,14 @@ import com.tokuda.attachecase.constant.StyleClass;
 import com.tokuda.attachecase.dialog.MessageDialog;
 import com.tokuda.attachecase.gui.ControllerManager;
 import com.tokuda.attachecase.gui.DefaultController;
+import com.tokuda.attachecase.gui.TaskManager;
 import com.tokuda.attachecase.gui.main.MainController;
+import com.tokuda.attachecase.jfx.CustomTask;
 import com.tokuda.common.constant.ItemConst;
 import com.tokuda.common.constant.MessageConst;
 import com.tokuda.common.util.UtilMessage;
 import com.tokuda.common.util.UtilString;
 
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
@@ -90,12 +91,10 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 
 	@FXML
 	public void onClickButton02(ActionEvent event) {
-		MainController main = ControllerManager.getController(MainController.class);
 
 		if (!UtilString.isEmpty(text01.getText()) && Files.exists(Paths.get(text01.getText()))) {
 			task01 = new Task01(new File(text01.getText()));
-			main.getProgress().progressProperty().bind(task01.progressProperty());
-			new Thread(task01).start();
+			TaskManager.start(task01);
 		}
 	}
 
@@ -120,7 +119,7 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 
 	private Task01 task01;
 
-	private class Task01 extends Task<Void> {
+	private class Task01 extends CustomTask<Void> {
 
 		private File directory;
 
@@ -130,16 +129,11 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 
 		@Override
 		public Void call() {
-			final int max = 3;
-			updateProgress(1, max);
 
 			try (Workbook book = WorkbookFactory.create(directory)) {
-				updateProgress(2, max);
 			} catch (EncryptedDocumentException | InvalidFormatException | IOException ex) {
 				ex.printStackTrace();
 			}
-			updateProgress(3, max);
-			new MessageDialog(UtilMessage.build(MessageConst.InfoMsg003)).show();
 			return null;
 		}
 	};
