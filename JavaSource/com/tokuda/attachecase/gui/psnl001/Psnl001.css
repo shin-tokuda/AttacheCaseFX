@@ -1,3 +1,10 @@
-.root {
-	-fx-background-color: red;
+.contents .jfx-button {
+	-jfx-button-type: FLAT;
+	-fx-text-fill: #FFFFFF;
+}
+
+.contents GridPane {
+	-fx-hgap: 4;
+	-fx-vgap: 4;
+	-fx-padding: 4 4 4 4;
 }

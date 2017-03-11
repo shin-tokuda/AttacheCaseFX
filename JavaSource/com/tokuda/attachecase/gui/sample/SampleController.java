@@ -17,10 +17,8 @@ import com.jfoenix.validation.RequiredFieldValidator;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.constant.StyleClass;
 import com.tokuda.attachecase.dialog.MessageDialog;
-import com.tokuda.attachecase.gui.ControllerManager;
 import com.tokuda.attachecase.gui.DefaultController;
 import com.tokuda.attachecase.gui.TaskManager;
-import com.tokuda.attachecase.gui.main.MainController;
 import com.tokuda.attachecase.jfx.CustomTask;
 import com.tokuda.common.constant.ItemConst;
 import com.tokuda.common.constant.MessageConst;
@@ -57,7 +55,6 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 
 	@FXML
 	public void initialize() {
-		MainController main = ControllerManager.getController(MainController.class);
 
 		text01.setPromptText(UtilMessage.build(MessageConst.InfoMsg001));
 		button01.setText(ItemConst.Item001.getValue());
@@ -72,7 +69,6 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 				text01.validate();
 			}
 		});
-		main.getProgress().setProgress(0);
 	}
 
 	@FXML

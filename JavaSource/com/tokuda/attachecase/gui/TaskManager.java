@@ -44,7 +44,8 @@ public class TaskManager {
 		tasks.remove(0);
 
 		if (!tasks.isEmpty()) {
-			start(tasks.get(0));
+			main.getProgress().progressProperty().bind(tasks.get(0).progressProperty());
+			new Thread(tasks.get(0)).start();
 		}
 	}
 }

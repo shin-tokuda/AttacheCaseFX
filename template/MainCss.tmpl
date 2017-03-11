@@ -14,6 +14,7 @@
 #appTitle {
 	-fx-font-size: 20;
 	-fx-font-family: "Arial";
+	-fx-font-weight: bold;
 	-fx-text-fill: {@white};
 	-fx-padding: 0 0 0 8;
 }
@@ -22,11 +23,11 @@
 	-fx-background-color: {@500};
 }
 
-.header_bar JFXHamburger StackPane {
+.header_bar .jfx-hamburger StackPane {
 	-fx-background-color: {@white};
 }
 
-.header_bar JFXButton {
+.header_bar .jfx-button {
 	-fx-text-fill: {@white};
 }
 
@@ -35,7 +36,7 @@
 --------------------------------------------- */
 
 .sideTitle {
-	-fx-font-size: 32px;
+	-fx-font-size: 30px;
 	-fx-font-family: "Arial Black";
 	-fx-fill: #9E9E9E;
 	-fx-effect: innershadow(three-pass-box , rgba(0, 0, 0, 0.7) , 6, 0.0 , 0 , 2);
@@ -46,31 +47,31 @@
 	-fx-padding: 0;
 }
 
-#menus MenuItemBox {
+#menus .menu-item-box {
 	-fx-padding: 8;
 }
 
-#menus MenuItemBox BorderPane {
+#menus .menu-item-box BorderPane {
 	-fx-padding: 0 4 0 0;
 }
 
-.contents JFXButton {
+.contents .jfx-button {
 	-fx-background-color: {@500};
 	-jfx-button-type: FLAT;
 	-fx-text-fill: {@white};
 }
 
-.contents JFXTextField {
+.contents .jfx-text-field {
 	-jfx-focus-color: {@500};
 	-jfx-unfocus-color: {@500};
 }
 
-.contents JFXTextArea {
+.contents .jfx-text-area {
 	-jfx-focus-color: {@500};
 	-jfx-unfocus-color: {@500};
 }
 
-.contents Separator {
+.contents .separator {
 	-fx-background-color: {@500};
 }
 

@@ -12,6 +12,9 @@ import java.io.OutputStreamWriter;
 import org.mozilla.universalchardet.UniversalDetector;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.FillRule;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Font;
 
 /**
@@ -22,8 +25,7 @@ public class UtilFile {
 	/**
 	 * 文字コードを検出します。
 	 *
-	 * @param file
-	 *            検査対象ファイル
+	 * @param file 検査対象ファイル
 	 * @return 文字コード
 	 */
 	public static String charSetDetection(File file) throws java.io.IOException {
@@ -58,11 +60,9 @@ public class UtilFile {
 	 * 対象ファイルに対するBufferedReaderを取得します。<br>
 	 * 文字コードを自動検出して取得するため、文字化けの可能性はかなり低いです。
 	 *
-	 * @param file
-	 *            対象ファイル
+	 * @param file 対象ファイル
 	 * @return 対象ファイルに対するBufferedReader
-	 * @throws IOException
-	 *             入出力例外
+	 * @throws IOException 入出力例外
 	 */
 	public static BufferedReader getBufferedReader(File file) throws IOException {
 		return new BufferedReader(new InputStreamReader(new FileInputStream(file), charSetDetection(file)));
@@ -72,11 +72,9 @@ public class UtilFile {
 	 * 対象ファイルに対するBufferedWriterを取得します。<br>
 	 * 既存ファイルの文字コードを自動検出して取得するため、ファイル内容の一部書き換えなどを行う際に便利です。
 	 *
-	 * @param file
-	 *            対象ファイル
+	 * @param file 対象ファイル
 	 * @return 対象ファイルに対するBufferedWriter
-	 * @throws IOException
-	 *             入出力例外
+	 * @throws IOException 入出力例外
 	 */
 	public static BufferedWriter getBufferedWriter(File file) throws IOException {
 		return getBufferedWriter(file, charSetDetection(file));
@@ -85,13 +83,10 @@ public class UtilFile {
 	/**
 	 * 対象ファイルに対するBufferedWriterを取得します。
 	 *
-	 * @param file
-	 *            対象ファイル
-	 * @param charSet
-	 *            文字コード
+	 * @param file 対象ファイル
+	 * @param charSet 文字コード
 	 * @return 対象ファイルに対するBufferedWriter
-	 * @throws IOException
-	 *             入出力例外
+	 * @throws IOException 入出力例外
 	 */
 	public static BufferedWriter getBufferedWriter(File file, String charSet) throws IOException {
 		return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charSet));
@@ -100,8 +95,7 @@ public class UtilFile {
 	/**
 	 * 画像ファイルを取得します。
 	 *
-	 * @param imagePath
-	 *            画像ファイルパス
+	 * @param imagePath 画像ファイルパス
 	 * @return 画像ファイル
 	 */
 	public static Image getImage(final String imagePath) {
@@ -119,10 +113,33 @@ public class UtilFile {
 	}
 
 	/**
+	 * SVGファイルを取得します。
+	 *
+	 * @param imagePath SVGファイルパス
+	 * @return SVGファイル
+	 */
+	public static Image getSvg(final String svgPath) {
+		Image result = null;
+
+		if (svgPath != null) {
+			SVGPath svg = new SVGPath();
+			svg.setStroke(Color.web("#000000"));
+			svg.setFillRule(FillRule.EVEN_ODD);
+			svg.setContent("");
+
+			try {
+				result = new Image(Thread.currentThread().getContextClassLoader().getResource("resource/" + svgPath).openStream());
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	/**
 	 * フォントをロードします。
 	 *
-	 * @param fontPath
-	 *            フォントファイルパス
+	 * @param fontPath フォントファイルパス
 	 * @return フォント
 	 */
 	public static Font loadFont(final String fontPath) {

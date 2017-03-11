@@ -25,6 +25,7 @@ import com.tokuda.common.util.UtilFile;
 import com.tokuda.common.util.UtilMessage;
 import com.tokuda.common.util.UtilString;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
@@ -35,6 +36,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -58,6 +60,8 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 	private List<BaseController<BaseSaveDTO>> applications = new ArrayList<>();
 
 	private List<File> saveFiles = new ArrayList<>();
+
+	private HamburgerBackArrowBasicTransition burgerTask01;
 
 	@FXML
 	private Pane pane;
@@ -116,7 +120,7 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 		appTitle.setGraphic(appImage);
 		sideTitle.setText(SystemData.config.getTitle());
 
-		HamburgerBackArrowBasicTransition burgerTask01 = new HamburgerBackArrowBasicTransition(burger);
+		burgerTask01 = new HamburgerBackArrowBasicTransition(burger);
 		burgerTask01.setRate(-1);
 
 		drawer.setSidePane(sidePane);
@@ -131,16 +135,8 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 		});
 
 		burger.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-
-			if (drawer.isShown()) {
-				burgerTask01.setRate(-1);
-				burgerTask01.play();
-				drawer.close();
-			} else {
-				burgerTask01.setRate(1);
-				burgerTask01.play();
-				drawer.open();
-			}
+			// drawerの開閉切り替え
+			drawerToggle();
 		});
 
 		headerBar.setOnMouseClicked(event -> {
@@ -183,6 +179,10 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 
 		// メニュー生成
 		createMenu();
+
+		// ショートカット登録
+		createShortcut();
+
 		progress.setProgress(0);
 	}
 
@@ -287,6 +287,62 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 		accordion.getPanes().add(new TitledPane("ファイル", fileList));
 
 		menus.getChildren().add(accordion);
+	}
+
+	/**
+	 * ショートカットを登録します。
+	 */
+	private void createShortcut() {
+
+		pane.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+			final KeyCombination ctrlD = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
+			final KeyCombination ctrlT = new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN);
+			final KeyCombination ctrlShiftT = new KeyCodeCombination(KeyCode.T, KeyCombination.SHIFT_DOWN, KeyCombination.CONTROL_DOWN);
+
+			@Override
+			public void handle(KeyEvent event) {
+
+				if (ctrlD.match(event)) {
+
+					// drawerの開閉切り替え
+					drawerToggle();
+
+				} else if (ctrlT.match(event)) {
+					SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+
+					if (selectionModel.getSelectedIndex() < (tabPane.getTabs().size() - 1)) {
+						selectionModel.selectNext();
+					} else {
+						selectionModel.selectFirst();
+					}
+
+				} else if (ctrlShiftT.match(event)) {
+					SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+
+					if (selectionModel.getSelectedIndex() != 0) {
+						selectionModel.selectPrevious();
+					} else {
+						selectionModel.selectLast();
+					}
+				}
+			}
+		});
+	}
+
+	/**
+	 * drawerの開閉切り替えを行います。
+	 */
+	private void drawerToggle() {
+
+		if (drawer.isShown()) {
+			burgerTask01.setRate(-1);
+			burgerTask01.play();
+			drawer.close();
+		} else {
+			burgerTask01.setRate(1);
+			burgerTask01.play();
+			drawer.open();
+		}
 	}
 
 	@Override

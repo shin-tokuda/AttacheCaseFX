@@ -26,10 +26,12 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("restriction")
 public class MenuItemBox extends HBox {
+	private static final String DEFAULT_STYLE_CLASS = "menu-item-box";
 
 	public MenuItemBox(final String label, final Image image, final KeyCodeCombination accelerator, final EventHandler<ActionEvent> handler) {
 		super();
 
+		getStyleClass().add(DEFAULT_STYLE_CLASS);
 		setCursor(Cursor.HAND);
 		setPrefWidth(300);
 

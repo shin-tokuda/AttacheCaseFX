@@ -1,5 +1,4 @@
-.contents JFXButton {
-	-fx-background-color: green;
+.contents .jfx-button {
 	-jfx-button-type: FLAT;
 	-fx-text-fill: #FFFFFF;
 }
