@@ -161,7 +161,7 @@ public class AutomaticGeneration {
 
 							for (int i = 0; i < entries.size(); i++) {
 								Map.Entry<String, String> entry = entries.get(i);
-								writer.println("\t// \"" + UtilString.trim(entry.getValue(), "\"") + "\"");
+								writer.println("\t// \"" + cnvEscape(UtilString.trim(entry.getValue(), "\"")) + "\"");
 
 								if (i < entries.size() - 1) {
 									writer.println("\t" + cnvForUpperCamelCase(entry.getKey()) + "(\"" + entry.getKey() + "\"),");
@@ -207,5 +207,15 @@ public class AutomaticGeneration {
 			}
 		}
 		return builder.toString();
+	}
+
+	/**
+	 * 対象の文字列をエスケープ変換します。
+	 *
+	 * @param str 対象文字列
+	 * @return 変換結果
+	 */
+	protected static String cnvEscape(final String str) {
+		return str.replace("\n", "\\n");
 	}
 }

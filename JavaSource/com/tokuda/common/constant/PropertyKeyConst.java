@@ -15,6 +15,8 @@ public enum PropertyKeyConst {
 	Item_Equal("item.equal"),
 	// "' '"
 	Item_HalfSpace("item.halfSpace"),
+	// "\n"
+	Item_LineBreak("item.lineBreak"),
 	// "|"
 	Item_Pipe("item.pipe"),
 	// "?"
@@ -41,10 +43,14 @@ public enum PropertyKeyConst {
 	Msg_Info005("msg.info005"),
 	// "処理を中断しました"
 	Msg_Info006("msg.info006"),
-	// "ダイアログ表示"
+	// "実行"
 	Psnl001_Button01_Text("psnl001.button01.text"),
-	// "内部ダイアログ表示"
-	Psnl001_Button02_Text("psnl001.button02.text"),
+	// "エンコード元文字列を入力して下さい"
+	Psnl001_Msg_Err001("psnl001.msg.err001"),
+	// "【エンコード結果】{0}"
+	Psnl001_Msg_Info001("psnl001.msg.info001"),
+	// "【デコード結果】{0}"
+	Psnl001_Msg_Info002("psnl001.msg.info002"),
 	// "参照"
 	Sample_Button01_Text("sample.button01.text"),
 	// "実行"

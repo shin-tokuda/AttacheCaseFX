@@ -13,7 +13,7 @@
 		},
 		{
 			"app_id" : "Psnl001",
-			"title" : "個人サンプル",
+			"title" : "BASE64エンコーダー",
 			"icon" : "image/ic_spellcheck_black_24dp_2x.png",
 			"icon_color" : "",
 			"extension" : "acfx1"
