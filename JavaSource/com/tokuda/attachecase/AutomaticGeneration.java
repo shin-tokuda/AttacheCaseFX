@@ -5,12 +5,22 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.tokuda.attachecase.dto.ColorPatternDTO;
+import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.attachecase.dto.SettingDTO;
+import com.tokuda.common.constant.PropertyKeyConst;
 import com.tokuda.common.util.UtilFile;
+import com.tokuda.common.util.UtilProperty;
 import com.tokuda.common.util.UtilString;
 
 /**
@@ -23,16 +33,27 @@ public class AutomaticGeneration {
 	public static void main(String[] args) {
 		System.out.println(AutomaticGeneration.class.getName() + " is start.");
 
-		File mainCssTmplFile = Paths.get("template", "MainCss.tmpl").toFile();
-		File mainCssFile = Paths.get("JavaSource/com/tokuda/attachecase/gui/main/Main.css").toFile();
+		// Main.cssを自動生成
+		createMainCss();
 
-		ColorPatternDTO colorPattern = null;
-		SettingDTO setting = null;
+		// PropertyKey.javaを自動生成
+		createPropertyKey();
+
+		System.out.println(AutomaticGeneration.class.getName() + " is end.");
+	}
+
+	/**
+	 * Main.cssを自動生成します。
+	 */
+	protected static void createMainCss() {
+		File tmplFile = Paths.get("template", "MainCss.tmpl").toFile();
+		File outputFile = Paths.get("JavaSource/com/tokuda/attachecase/gui/main/Main.css").toFile();
+
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.enable(SerializationFeature.INDENT_OUTPUT);
-			colorPattern = mapper.readValue(Paths.get("conf", "color_pattern.json").toFile(), ColorPatternDTO.class);
-			setting = mapper.readValue(Paths.get("conf", "setting.json").toFile(), SettingDTO.class);
+			ColorPatternDTO colorPattern = mapper.readValue(Paths.get("conf", "color_pattern.json").toFile(), ColorPatternDTO.class);
+			SettingDTO setting = mapper.readValue(Paths.get("conf", "setting.json").toFile(), SettingDTO.class);
 
 			if (colorPattern != null) {
 				ColorPatternDTO.PatternDTO pattern = null;
@@ -54,8 +75,8 @@ public class AutomaticGeneration {
 
 				if (pattern != null) {
 
-					try (BufferedReader reader = UtilFile.getBufferedReader(mainCssTmplFile);
-							PrintWriter writer = new PrintWriter(UtilFile.getBufferedWriter(mainCssFile))) {
+					try (BufferedReader reader = UtilFile.getBufferedReader(tmplFile);
+							PrintWriter writer = new PrintWriter(UtilFile.getBufferedWriter(outputFile))) {
 
 						String line;
 						while ((line = reader.readLine()) != null) {
@@ -83,6 +104,108 @@ public class AutomaticGeneration {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		System.out.println(AutomaticGeneration.class.getName() + " is end.");
+	}
+
+	/**
+	 * PropertyKey.javaを自動生成します。
+	 */
+	protected static void createPropertyKey() {
+
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.enable(SerializationFeature.INDENT_OUTPUT);
+			ConfigDTO config = mapper.readValue(Paths.get("conf", "config.json").toFile(), ConfigDTO.class);
+
+			if (config != null) {
+				SystemData.config = config;
+
+				// -------------------------------------------------
+				// propertiesファイルの読み込み
+				// -------------------------------------------------
+				Map<String, String> properties = new TreeMap<>();
+
+				ResourceBundle common = ResourceBundle.getBundle("resource/property/common", Locale.JAPANESE);
+				Enumeration<String> commonKeys = common.getKeys();
+
+				while (commonKeys.hasMoreElements()) {
+					String key = commonKeys.nextElement();
+					properties.put(key, common.getString(key));
+				}
+
+				config.getProducts().stream().forEach(product -> {
+					ResourceBundle resource = ResourceBundle.getBundle("resource/property/" + product, Locale.JAPANESE);
+					Enumeration<String> resourceKeys = resource.getKeys();
+
+					while (resourceKeys.hasMoreElements()) {
+						String key = resourceKeys.nextElement();
+						properties.put(key, resource.getString(key));
+					}
+				});
+
+				// -------------------------------------------------
+				// propertiesファイルの読み込み
+				// -------------------------------------------------
+				File tmplFile = Paths.get("template", "PropertyKeyConst.tmpl").toFile();
+				File outputFile = Paths.get("JavaSource/com/tokuda/common/constant/PropertyKeyConst.java").toFile();
+
+				try (BufferedReader reader = UtilFile.getBufferedReader(tmplFile);
+						PrintWriter writer = new PrintWriter(UtilFile.getBufferedWriter(outputFile))) {
+
+					String line;
+					while ((line = reader.readLine()) != null) {
+
+						if (!line.equals("{@slot}")) {
+							writer.println(line);
+						} else {
+							List<Map.Entry<String, String>> entries = new ArrayList<>(properties.entrySet());
+
+							for (int i = 0; i < entries.size(); i++) {
+								Map.Entry<String, String> entry = entries.get(i);
+								writer.println("\t// \"" + UtilString.trim(entry.getValue(), "\"") + "\"");
+
+								if (i < entries.size() - 1) {
+									writer.println("\t" + cnvForUpperCamelCase(entry.getKey()) + "(\"" + entry.getKey() + "\"),");
+								} else {
+									writer.println("\t" + cnvForUpperCamelCase(entry.getKey()) + "(\"" + entry.getKey() + "\");");
+								}
+							}
+						}
+					}
+				}
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * 対象の文字列をアッパーキャメルケースに変換します。
+	 *
+	 * @param str 対象文字列
+	 * @return 変換結果
+	 */
+	protected static String cnvForUpperCamelCase(final String str) {
+		StringBuilder builder = new StringBuilder();
+
+		String[] splits = str.split("\\.");
+
+		for (int i = 0; i < splits.length; i++) {
+			String split = splits[i];
+
+			if (i > 0) {
+				builder.append(UtilProperty.getValue(PropertyKeyConst.Item_UnderScore.getValue()));
+			}
+
+			if (split.length() > 0) {
+				String first = split.substring(0, 1);
+				builder.append(first.toUpperCase());
+
+				if (split.length() > 1) {
+					String second = split.substring(1);
+					builder.append(second);
+				}
+			}
+		}
+		return builder.toString();
 	}
 }

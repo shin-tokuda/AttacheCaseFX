@@ -1,5 +1,8 @@
 {
 	"app_name" : "Attache Case FX",
+	"products" : [
+		"personal"
+	],
 	"applications" : [
 		{
 			"app_id" : "Sample",

@@ -1,0 +1,19 @@
+package com.tokuda.common.constant;
+
+import lombok.Getter;
+
+public enum PropertyKeyConst {
+{@slot}
+
+	@Getter
+	private String value;
+
+	/**
+	 * コンストラクタ
+	 *
+	 * @param value
+	 */
+	private PropertyKeyConst(final String value) {
+		this.value = value;
+	}
+}

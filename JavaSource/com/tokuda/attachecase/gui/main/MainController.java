@@ -20,9 +20,10 @@ import com.tokuda.attachecase.gui.ControllerManager;
 import com.tokuda.attachecase.gui.SingletonController;
 import com.tokuda.attachecase.jfx.MenuItemBox;
 import com.tokuda.common.constant.IconConst;
-import com.tokuda.common.constant.MessageConst;
+import com.tokuda.common.constant.PropertyKeyConst;
 import com.tokuda.common.util.UtilFile;
 import com.tokuda.common.util.UtilMessage;
+import com.tokuda.common.util.UtilProperty;
 import com.tokuda.common.util.UtilString;
 
 import javafx.event.EventHandler;
@@ -218,7 +219,7 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 		fileList.getChildren()
 				.add(new MenuItemBox("開く", IconConst.FileOpen.getImage(), new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN), event -> {
 					FileChooser chooser = new FileChooser();
-					chooser.setTitle(UtilMessage.build(MessageConst.InfoMsg003));
+					chooser.setTitle(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info003.getValue())));
 					File file = chooser.showOpenDialog(SystemData.stage);
 
 					if (file != null && file.exists()) {

@@ -1,6 +1,6 @@
 package com.tokuda.common.util;
 
-import com.tokuda.common.constant.CommonConst;
+import com.tokuda.common.constant.PropertyKeyConst;
 
 /**
  * Created by s-tokuda on 2016/08/28.
@@ -13,7 +13,7 @@ public class UtilString {
 		if (input != null) {
 			result = input;
 		} else {
-			result = CommonConst.Blank.getValue();
+			result = UtilProperty.getValue(PropertyKeyConst.Item_Blank.getValue());
 		}
 		return result;
 	}
@@ -22,38 +22,50 @@ public class UtilString {
 		return cnvNull(input).isEmpty();
 	}
 
+	public static String trim(final String target, final String trimStr) {
+		String result = target;
+
+		if (target.startsWith(trimStr)) {
+			result = result.substring(trimStr.length());
+		}
+		if (target.endsWith(trimStr)) {
+			result = result.substring(0, result.length() - trimStr.length());
+		}
+		return result;
+	}
+
 	public static String getYear(final String input) {
 		String result;
-		String[] date = UtilString.cnvNull(input).split(CommonConst.Slash.getValue());
+		String[] date = UtilString.cnvNull(input).split(UtilProperty.getValue(PropertyKeyConst.Item_Slash.getValue()));
 
 		if (date.length == 3) {
 			result = date[0];
 		} else {
-			result = CommonConst.Blank.getValue();
+			result = UtilProperty.getValue(PropertyKeyConst.Item_Blank.getValue());
 		}
 		return result;
 	}
 
 	public static String getMonth(final String input) {
 		String result;
-		String[] date = UtilString.cnvNull(input).split(CommonConst.Slash.getValue());
+		String[] date = UtilString.cnvNull(input).split(UtilProperty.getValue(PropertyKeyConst.Item_Slash.getValue()));
 
 		if (date.length == 3) {
 			result = date[1];
 		} else {
-			result = CommonConst.Blank.getValue();
+			result = UtilProperty.getValue(PropertyKeyConst.Item_Blank.getValue());
 		}
 		return result;
 	}
 
 	public static String getDay(final String input) {
 		String result;
-		String[] date = UtilString.cnvNull(input).split(CommonConst.Slash.getValue());
+		String[] date = UtilString.cnvNull(input).split(UtilProperty.getValue(PropertyKeyConst.Item_Slash.getValue()));
 
 		if (date.length == 3) {
 			result = date[2];
 		} else {
-			result = CommonConst.Blank.getValue();
+			result = UtilProperty.getValue(PropertyKeyConst.Item_Blank.getValue());
 		}
 		return result;
 	}

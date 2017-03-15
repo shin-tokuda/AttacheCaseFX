@@ -16,13 +16,15 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.constant.StyleClass;
+import com.tokuda.attachecase.dialog.ExceptionDialog;
 import com.tokuda.attachecase.dialog.MessageDialog;
 import com.tokuda.attachecase.gui.DefaultController;
 import com.tokuda.attachecase.gui.TaskManager;
 import com.tokuda.attachecase.jfx.CustomTask;
 import com.tokuda.common.constant.ItemConst;
-import com.tokuda.common.constant.MessageConst;
+import com.tokuda.common.constant.PropertyKeyConst;
 import com.tokuda.common.util.UtilMessage;
+import com.tokuda.common.util.UtilProperty;
 import com.tokuda.common.util.UtilString;
 
 import javafx.event.ActionEvent;
@@ -56,12 +58,12 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 	@FXML
 	public void initialize() {
 
-		text01.setPromptText(UtilMessage.build(MessageConst.InfoMsg001));
+		text01.setPromptText(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info001.getValue())));
 		button01.setText(ItemConst.Item001.getValue());
 		button02.setText(ItemConst.Item002.getValue());
 
 		RequiredFieldValidator validator = new RequiredFieldValidator();
-		validator.setMessage(UtilMessage.build(MessageConst.ErrMsg001));
+		validator.setMessage(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Err001.getValue())));
 		validator.setErrorStyleClass(StyleClass.ErrorMsg.getValue());
 		text01.getValidators().add(validator);
 		text01.focusedProperty().addListener((o, oldVal, newVal) -> {
@@ -74,14 +76,14 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 	@FXML
 	public void onClickButton01(ActionEvent event) {
 		FileChooser chooser = new FileChooser();
-		chooser.setTitle(UtilMessage.build(MessageConst.InfoMsg002));
+		chooser.setTitle(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info002.getValue())));
 		File directory = chooser.showOpenDialog(SystemData.stage);
 		text01.validate();
 
 		if (directory != null) {
 			text01.setText(directory.getAbsolutePath());
 		} else {
-			new MessageDialog(UtilMessage.build(MessageConst.ErrMsg002)).show();
+			new MessageDialog(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Err002.getValue()))).show();
 		}
 	}
 
@@ -125,10 +127,12 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 
 		@Override
 		public Void call() {
+			new ExceptionDialog(new NullPointerException()).showAndWait();
 
 			try (Workbook book = WorkbookFactory.create(directory)) {
 			} catch (EncryptedDocumentException | InvalidFormatException | IOException ex) {
 				ex.printStackTrace();
+				throw new RuntimeException();
 			}
 			return null;
 		}

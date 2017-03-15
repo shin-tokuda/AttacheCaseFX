@@ -17,6 +17,9 @@ public class ConfigDTO {
 	@JsonProperty("app_name")
 	private String title;
 
+	@JsonProperty("products")
+	private List<String> products;
+
 	@JsonProperty("applications")
 	private List<ApplicationDTO> applications;
 

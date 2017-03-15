@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.jfoenix.controls.JFXButton;
 import com.tokuda.attachecase.dialog.ConfirmDialog;
+import com.tokuda.attachecase.dialog.ExceptionDialog;
 import com.tokuda.attachecase.dialog.MessageSnackBar;
 import com.tokuda.attachecase.gui.DefaultController;
 
@@ -68,6 +69,14 @@ public class Psnl001Controller extends DefaultController<Psnl001SaveDTO> {
 
 	@FXML
 	public void onClickButton02(ActionEvent event) {
+
+		Optional<ButtonType> result = new ExceptionDialog(new NullPointerException()).showAndWait();
+		result.ifPresent(consumer -> {
+
+			if (consumer == ButtonType.OK) {
+				new MessageSnackBar("bbb").show();
+			}
+		});
 	}
 
 	// -----------------------------------------------------------------
