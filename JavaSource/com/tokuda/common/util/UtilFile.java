@@ -11,6 +11,8 @@ import java.io.OutputStreamWriter;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
+import com.tokuda.attachecase.dialog.ExceptionDialog;
+
 import javafx.scene.image.Image;
 
 /**
@@ -102,7 +104,7 @@ public class UtilFile {
 			try {
 				result = new Image(Thread.currentThread().getContextClassLoader().getResource("resource/" + imagePath).openStream());
 			} catch (IOException ex) {
-				ex.printStackTrace();
+				new ExceptionDialog(ex).showAndWait();
 			}
 		}
 		return result;

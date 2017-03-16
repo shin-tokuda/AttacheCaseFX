@@ -21,7 +21,6 @@ import com.tokuda.attachecase.dialog.MessageDialog;
 import com.tokuda.attachecase.gui.DefaultController;
 import com.tokuda.attachecase.gui.TaskManager;
 import com.tokuda.attachecase.jfx.CustomTask;
-import com.tokuda.common.constant.ItemConst;
 import com.tokuda.common.constant.PropertyKeyConst;
 import com.tokuda.common.util.UtilMessage;
 import com.tokuda.common.util.UtilProperty;
@@ -58,9 +57,9 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 	@FXML
 	public void initialize() {
 
-		text01.setPromptText(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info001.getValue())));
-		button01.setText(ItemConst.Item001.getValue());
-		button02.setText(ItemConst.Item002.getValue());
+		text01.setPromptText(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Sample_Text01_Prompt.getValue())));
+		button01.setText(UtilProperty.getValue(PropertyKeyConst.Sample_Button01_Text.getValue()));
+		button02.setText(UtilProperty.getValue(PropertyKeyConst.Sample_Button02_Text.getValue()));
 
 		RequiredFieldValidator validator = new RequiredFieldValidator();
 		validator.setMessage(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Err001.getValue())));
@@ -131,7 +130,7 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 
 			try (Workbook book = WorkbookFactory.create(directory)) {
 			} catch (EncryptedDocumentException | InvalidFormatException | IOException ex) {
-				ex.printStackTrace();
+				new ExceptionDialog(ex).showAndWait();
 				throw new RuntimeException();
 			}
 			return null;

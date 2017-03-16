@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.tokuda.attachecase.SystemData;
+import com.tokuda.attachecase.dialog.ExceptionDialog;
 import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.attachecase.dto.ConfigDTO.ApplicationDTO;
 
@@ -126,7 +127,7 @@ public class ControllerManager {
 					}
 				}
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				new ExceptionDialog(ex).showAndWait();
 			}
 
 			if (SingletonController.class.isAssignableFrom(cls)) {

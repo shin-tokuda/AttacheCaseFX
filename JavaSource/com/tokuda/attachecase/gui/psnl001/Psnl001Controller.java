@@ -46,12 +46,17 @@ public class Psnl001Controller extends DefaultController<Psnl001SaveDTO> {
 
 	@Override
 	public void open(final File file) {
-		open(file, Psnl001SaveDTO.class);
+		Psnl001SaveDTO saveDTO = open(file, Psnl001SaveDTO.class);
+
+		if (saveDTO != null) {
+			text01.setText(saveDTO.getText01());
+			text02.setText(saveDTO.getText02());
+		}
 	}
 
 	@Override
 	protected void preSave() {
-		setSaveDTO(new Psnl001SaveDTO());
+		setSaveDTO(new Psnl001SaveDTO(text01.getText(), text02.getText()));
 	}
 
 	@FXML

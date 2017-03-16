@@ -2,11 +2,13 @@ package com.tokuda.attachecase.gui;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.tokuda.attachecase.SystemData;
 import com.tokuda.attachecase.constant.CharSet;
+import com.tokuda.attachecase.dialog.ExceptionDialog;
 import com.tokuda.attachecase.dialog.MessageSnackBar;
 import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.common.constant.PropertyKeyConst;
@@ -39,20 +41,29 @@ public abstract class BaseController<T extends BaseSaveDTO> {
 			mapper.enable(SerializationFeature.INDENT_OUTPUT);
 			_saveDTO = mapper.readValue(file, cls);
 		} catch (IOException ex) {
-			ex.printStackTrace();
-			new MessageSnackBar(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Err003.getValue()))).show();
+			new ExceptionDialog(ex).showAndWait();
 		}
 		return _saveDTO;
 	}
 
 	public File save() {
+		String extension = appDTO.getExtension();
+		if (!extension.startsWith(".")) {
+			extension = "." + extension;
+		}
+
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info003.getValue())));
-		chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(appDTO.getTitle() + " (*." + appDTO.getExtension() + ")", appDTO.getExtension()));
+		chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(appDTO.getTitle() + " (*" + extension + ")", "*" + extension));
 		File file = chooser.showSaveDialog(SystemData.stage);
 
 		if (file != null) {
 			preSave();
+
+			String fileName = file.getName();
+			if (!fileName.endsWith(extension)) {
+				file = Paths.get(file.getParent(), fileName + extension).toFile();
+			}
 
 			try {
 				ObjectMapper mapper = new ObjectMapper();
@@ -60,8 +71,7 @@ public abstract class BaseController<T extends BaseSaveDTO> {
 				mapper.writeValue(UtilFile.getBufferedWriter(file, CharSet.Utf8.getValue()), _saveDTO);
 				new MessageSnackBar(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info005.getValue()))).show();
 			} catch (IOException ex) {
-				ex.printStackTrace();
-				new MessageSnackBar(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Err003.getValue()))).show();
+				new ExceptionDialog(ex).showAndWait();
 			}
 		}
 		return file;
@@ -78,8 +88,7 @@ public abstract class BaseController<T extends BaseSaveDTO> {
 				mapper.writeValue(UtilFile.getBufferedWriter(file, CharSet.Utf8.getValue()), _saveDTO);
 				new MessageSnackBar(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info005.getValue()))).show();
 			} catch (IOException ex) {
-				ex.printStackTrace();
-				new MessageSnackBar(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Err003.getValue()))).show();
+				new ExceptionDialog(ex).showAndWait();
 			}
 		}
 		return file;

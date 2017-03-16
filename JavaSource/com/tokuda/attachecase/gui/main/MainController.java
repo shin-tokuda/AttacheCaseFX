@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.tokuda.attachecase.SystemData;
+import com.tokuda.attachecase.dialog.ExceptionDialog;
 import com.tokuda.attachecase.dialog.MessageSnackBar;
 import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.attachecase.gui.BaseController;
@@ -206,7 +207,7 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 					applications.add(controller);
 					saveFiles.add(null);
 				} catch (ClassNotFoundException ex) {
-					ex.printStackTrace();
+					new ExceptionDialog(ex).showAndWait();
 				}
 				new MessageSnackBar(app.getTitle()).show();
 			}));
@@ -237,7 +238,7 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 									applications.add(controller);
 									saveFiles.add(file);
 								} catch (ClassNotFoundException ex) {
-									ex.printStackTrace();
+									new ExceptionDialog(ex).showAndWait();
 								}
 								break;
 							}
