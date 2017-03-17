@@ -335,5 +335,8 @@
     "A200" : null,
     "A400" : null,
     "A700" : null
-  } ]
+  } ],
+  "primary_text" : "#212121",
+  "secondary_text" : "#727272",
+  "divider_color" : "#B6B6B6"
 }

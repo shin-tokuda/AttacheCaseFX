@@ -73,14 +73,6 @@ public class MenuItemBox extends HBox {
 			title.setPrefWidth(260);
 			shortcut.setPrefWidth(0);
 		}
-
-		this.setOnMouseEntered(event -> {
-			setStyle("-fx-background-color: #F5F5F5;");
-		});
-
-		this.setOnMouseExited(event -> {
-			setStyle("-fx-background-color:transparent;");
-		});
 	}
 
 	/**

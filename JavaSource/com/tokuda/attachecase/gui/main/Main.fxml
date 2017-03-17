@@ -42,7 +42,7 @@
                   <Label fx:id="appTitle" text="Label" GridPane.columnIndex="1" />
                   <JFXButton fx:id="hideButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="_" GridPane.columnIndex="2" />
                   <JFXButton fx:id="resizeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="□" GridPane.columnIndex="3" />
-                  <JFXButton fx:id="closeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="×" GridPane.columnIndex="4" />
+                  <JFXButton fx:id="closeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="close" text="×" GridPane.columnIndex="4" />
                </children>
             </GridPane>
             <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">

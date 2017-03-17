@@ -34,7 +34,7 @@
             <JFXButton fx:id="button01" minWidth="100.0" onAction="#onClickButton01" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <JFXButton fx:id="button02" maxWidth="1.7976931348623157E308" onAction="#onClickButton02" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <JFXButton fx:id="button02" maxWidth="1.7976931348623157E308" onAction="#onClickButton02" styleClass="positive" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Separator maxHeight="-Infinity" minHeight="-Infinity" GridPane.rowIndex="2" />
       <JFXTextArea fx:id="text02" GridPane.columnSpan="2" GridPane.rowIndex="3" />
    </children>

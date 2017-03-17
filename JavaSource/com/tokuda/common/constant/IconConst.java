@@ -6,8 +6,6 @@ import javafx.scene.image.Image;
 import lombok.Getter;
 
 public enum IconConst {
-	// アプリケーションアイコン
-	Application(UtilFile.getImage("image/briefcase.png")),
 	// アタッシュケースアイコン
 	AttacheCase(UtilFile.getImage("image/ic_work_white_24dp_2x.png")),
 	// フルスクリーンアイコン

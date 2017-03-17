@@ -56,14 +56,18 @@ public class AutomaticGeneration {
 			SettingDTO setting = mapper.readValue(Paths.get("conf", "setting.json").toFile(), SettingDTO.class);
 
 			if (colorPattern != null) {
-				ColorPatternDTO.PatternDTO pattern = null;
+				ColorPatternDTO.PatternDTO primary = null;
+				ColorPatternDTO.PatternDTO secondary = null;
 				ColorPatternDTO.PatternDTO black = null;
 				ColorPatternDTO.PatternDTO white = null;
 
 				for (ColorPatternDTO.PatternDTO dto : colorPattern.getPatterns()) {
 
-					if (UtilString.cnvNull(dto.getPattern()).equals(setting.getColorPattern())) {
-						pattern = dto;
+					if (UtilString.cnvNull(dto.getPattern()).equals(setting.getPrimaryColor())) {
+						primary = dto;
+					}
+					if (UtilString.cnvNull(dto.getPattern()).equals(setting.getSecondaryColor())) {
+						secondary = dto;
 					}
 					if (UtilString.cnvNull(dto.getPattern()).equals("Black")) {
 						black = dto;
@@ -73,29 +77,40 @@ public class AutomaticGeneration {
 					}
 				}
 
-				if (pattern != null) {
+				if (primary != null) {
 
 					try (BufferedReader reader = UtilFile.getBufferedReader(tmplFile);
 							PrintWriter writer = new PrintWriter(UtilFile.getBufferedWriter(outputFile))) {
 
 						String line;
 						while ((line = reader.readLine()) != null) {
-							line = line.replace("{@50}", pattern.getP50());
-							line = line.replace("{@100}", pattern.getP100());
-							line = line.replace("{@200}", pattern.getP200());
-							line = line.replace("{@300}", pattern.getP300());
-							line = line.replace("{@400}", pattern.getP400());
-							line = line.replace("{@500}", pattern.getP500());
-							line = line.replace("{@600}", pattern.getP600());
-							line = line.replace("{@700}", pattern.getP700());
-							line = line.replace("{@800}", pattern.getP800());
-							line = line.replace("{@900}", pattern.getP900());
-							line = line.replace("{@A100}", pattern.getPa100());
-							line = line.replace("{@A200}", pattern.getPa200());
-							line = line.replace("{@A400}", pattern.getPa400());
-							line = line.replace("{@A700}", pattern.getPa700());
-							line = line.replace("{@black}", black.getP500());
-							line = line.replace("{@white}", white.getP500());
+							line = line.replace("{@P50}", primary.getP50());
+							line = line.replace("{@P100}", primary.getP100());
+							line = line.replace("{@P200}", primary.getP200());
+							line = line.replace("{@P300}", primary.getP300());
+							line = line.replace("{@P400}", primary.getP400());
+							line = line.replace("{@P500}", primary.getP500());
+							line = line.replace("{@P600}", primary.getP600());
+							line = line.replace("{@P700}", primary.getP700());
+							line = line.replace("{@P800}", primary.getP800());
+							line = line.replace("{@P900}", primary.getP900());
+							line = line.replace("{@A100}", secondary.getPa100());
+							line = line.replace("{@A200}", secondary.getPa200());
+							line = line.replace("{@A400}", secondary.getPa400());
+							line = line.replace("{@A700}", secondary.getPa700());
+							line = line.replace("{@BLACK}", black.getP500());
+							line = line.replace("{@WHITE}", white.getP500());
+
+							line = line.replace("{@DARK_PRIMARY}", primary.getP700());
+							line = line.replace("{@PRIMARY}", primary.getP500());
+							line = line.replace("{@LIGHT_PRIMARY}", primary.getP100());
+							line = line.replace("{@DARK_SECONDARY}", secondary.getPa400());
+							line = line.replace("{@SECONDARY}", secondary.getPa200());
+							line = line.replace("{@LIGHT_SECONDARY}", secondary.getPa100());
+							line = line.replace("{@PRIMARY_TEXT}", colorPattern.getPrimaryText());
+							line = line.replace("{@SECONDARY_TEXT}", colorPattern.getSecondaryText());
+							line = line.replace("{@DIVIDER_COLOR}", colorPattern.getDividerColor());
+
 							writer.println(line);
 						}
 					}

@@ -3,8 +3,20 @@
 --------------------------------------------- */
 
 .root {
-	-fx-border-color : {@200};
+	-fx-border-color : {@LIGHT_PRIMARY};
 	-fx-font-family: "Meiryo";
+}
+
+.jfx-button.positive {
+	-fx-background-color: {@SECONDARY} !important;
+}
+
+.jfx-button.positive:hover {
+	-fx-background-color: {@LIGHT_SECONDARY} !important;
+}
+
+.jfx-button:hover {
+	-fx-cursor: hand;
 }
 
 /* ---------------------------------------------
@@ -15,20 +27,33 @@
 	-fx-font-size: 20;
 	-fx-font-family: "Arial";
 	-fx-font-weight: bold;
-	-fx-text-fill: {@white};
+	-fx-text-fill: {@WHITE};
 	-fx-padding: 0 0 0 8;
 }
 
 .header_bar {
-	-fx-background-color: {@500};
+	-fx-background-color: {@PRIMARY};
 }
 
 .header_bar .jfx-hamburger StackPane {
-	-fx-background-color: {@white};
+	-fx-background-color: {@WHITE};
+}
+
+.header_bar .jfx-hamburger:hover {
+	-fx-cursor: hand;
+	-fx-background-color: {@P300};
 }
 
 .header_bar .jfx-button {
-	-fx-text-fill: {@white};
+	-fx-text-fill: {@WHITE};
+}
+
+.header_bar .jfx-button:hover {
+	-fx-background-color: {@P300};
+}
+
+.header_bar .close:hover {
+	-fx-background-color: {@SECONDARY};
 }
 
 /* ---------------------------------------------
@@ -43,7 +68,7 @@
 }
 
 #menus VBox {
-	-fx-background-color: {@white};
+	-fx-background-color: {@WHITE};
 	-fx-padding: 0;
 }
 
@@ -51,32 +76,40 @@
 	-fx-padding: 8;
 }
 
+#menus .menu-item-box:hover {
+	-fx-background-color: {@P50};
+}
+
 #menus .menu-item-box BorderPane {
 	-fx-padding: 0 4 0 0;
 }
 
 .contents .jfx-button {
-	-fx-background-color: {@500};
+	-fx-background-color: {@PRIMARY};
 	-jfx-button-type: FLAT;
-	-fx-text-fill: {@white};
+	-fx-text-fill: {@WHITE};
+}
+
+.contents .jfx-button:hover {
+	-fx-background-color: {@P300};
 }
 
 .contents .jfx-text-field {
-	-jfx-focus-color: {@500};
-	-jfx-unfocus-color: {@500};
+	-jfx-focus-color: {@PRIMARY};
+	-jfx-unfocus-color: {@PRIMARY};
 }
 
 .contents .jfx-text-area {
-	-jfx-focus-color: {@500};
-	-jfx-unfocus-color: {@500};
+	-jfx-focus-color: {@PRIMARY};
+	-jfx-unfocus-color: {@PRIMARY};
 }
 
 .contents .separator {
-	-fx-background-color: {@500};
+	-fx-background-color: {@PRIMARY};
 }
 
 .contents .tab-header-background {
-	-fx-background-color: {@500};
+	-fx-background-color: {@PRIMARY};
 }
 
 /* ---------------------------------------------
@@ -84,9 +117,9 @@
 --------------------------------------------- */
 
 .jfx-snackbar-content {
-	-fx-background-color: {@black};
+	-fx-background-color: {@BLACK};
 }
 
 .jfx-snackbar-toast {
-	-fx-text-fill: {@white};
+	-fx-text-fill: {@WHITE};
 }

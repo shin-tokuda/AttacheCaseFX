@@ -1,5 +1,6 @@
 {
 	"app_name" : "Attache Case FX",
+	"app_icon" : "image/briefcase.png",
 	"products" : [
 		"personal"
 	],

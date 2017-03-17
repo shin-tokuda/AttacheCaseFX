@@ -22,7 +22,7 @@
               </rowConstraints>
                <children>
                   <JFXTextArea fx:id="text01" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" />
-                  <JFXButton fx:id="button01" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#onClickButton01" GridPane.rowIndex="1" />
+                  <JFXButton fx:id="button01" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#onClickButton01" styleClass="positive" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

@@ -1,5 +1,6 @@
 {
   "initial_width" : 600.0,
   "initial_height" : 400.0,
-  "color_pattern" : "Indigo"
+  "primary_color" : "Indigo",
+  "secondary_color" : "Red"
 }

@@ -3,8 +3,20 @@
 --------------------------------------------- */
 
 .root {
-	-fx-border-color : #9FA8DA;
+	-fx-border-color : #C5CAE9;
 	-fx-font-family: "Meiryo";
+}
+
+.jfx-button.positive {
+	-fx-background-color: #FF5252 !important;
+}
+
+.jfx-button.positive:hover {
+	-fx-background-color: #FF8A80 !important;
+}
+
+.jfx-button:hover {
+	-fx-cursor: hand;
 }
 
 /* ---------------------------------------------
@@ -27,8 +39,21 @@
 	-fx-background-color: #FFFFFF;
 }
 
+.header_bar .jfx-hamburger:hover {
+	-fx-cursor: hand;
+	-fx-background-color: #7986CB;
+}
+
 .header_bar .jfx-button {
 	-fx-text-fill: #FFFFFF;
+}
+
+.header_bar .jfx-button:hover {
+	-fx-background-color: #7986CB;
+}
+
+.header_bar .close:hover {
+	-fx-background-color: #FF5252;
 }
 
 /* ---------------------------------------------
@@ -51,6 +76,10 @@
 	-fx-padding: 8;
 }
 
+#menus .menu-item-box:hover {
+	-fx-background-color: #E8EAF6;
+}
+
 #menus .menu-item-box BorderPane {
 	-fx-padding: 0 4 0 0;
 }
@@ -59,6 +88,10 @@
 	-fx-background-color: #3F51B5;
 	-jfx-button-type: FLAT;
 	-fx-text-fill: #FFFFFF;
+}
+
+.contents .jfx-button:hover {
+	-fx-background-color: #7986CB;
 }
 
 .contents .jfx-text-field {

@@ -17,6 +17,15 @@ public class ColorPatternDTO {
 	@JsonProperty("patterns")
 	private List<PatternDTO> patterns;
 
+	@JsonProperty("primary_text")
+	private String primaryText;
+
+	@JsonProperty("secondary_text")
+	private String secondaryText;
+
+	@JsonProperty("divider_color")
+	private String dividerColor;
+
 	@Data
 	public static class PatternDTO {
 

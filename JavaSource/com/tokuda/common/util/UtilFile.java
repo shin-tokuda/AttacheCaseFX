@@ -104,6 +104,7 @@ public class UtilFile {
 			try {
 				result = new Image(Thread.currentThread().getContextClassLoader().getResource("resource/" + imagePath).openStream());
 			} catch (IOException ex) {
+				// TODO Utilクラスでこれはしたくない。。。
 				new ExceptionDialog(ex).showAndWait();
 			}
 		}

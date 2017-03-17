@@ -12,7 +12,6 @@ import com.tokuda.attachecase.dto.ConfigDTO;
 import com.tokuda.attachecase.dto.SettingDTO;
 import com.tokuda.attachecase.gui.main.MainController;
 import com.tokuda.attachecase.jfx.ResizeHelper;
-import com.tokuda.common.constant.IconConst;
 import com.tokuda.common.util.UtilFile;
 
 import javafx.application.Application;
@@ -42,7 +41,7 @@ public class Execute extends Application {
 		ControllerManager.load(MainController.class, primaryStage);
 		ResizeHelper.addResizeListener(primaryStage);
 		primaryStage.setTitle(SystemData.config.getTitle());
-		primaryStage.getIcons().add(IconConst.Application.getImage());
+		primaryStage.getIcons().add(UtilFile.getImage(SystemData.config.getAppIcon()));
 		primaryStage.setWidth(SystemData.setting.getInitialWidth());
 		primaryStage.setHeight(SystemData.setting.getInitialHeight());
 		primaryStage.initStyle(StageStyle.TRANSPARENT);

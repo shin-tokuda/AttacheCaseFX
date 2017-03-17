@@ -15,7 +15,6 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.tokuda.attachecase.SystemData;
-import com.tokuda.attachecase.constant.StyleClass;
 import com.tokuda.attachecase.dialog.ExceptionDialog;
 import com.tokuda.attachecase.dialog.MessageDialog;
 import com.tokuda.attachecase.gui.DefaultController;
@@ -63,7 +62,7 @@ public class SampleController extends DefaultController<SampleSaveDTO> {
 
 		RequiredFieldValidator validator = new RequiredFieldValidator();
 		validator.setMessage(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Err001.getValue())));
-		validator.setErrorStyleClass(StyleClass.ErrorMsg.getValue());
+		validator.setErrorStyleClass("error-msg");
 		text01.getValidators().add(validator);
 		text01.focusedProperty().addListener((o, oldVal, newVal) -> {
 			if (!newVal) {
