@@ -18,6 +18,13 @@
 			"icon" : "image/ic_spellcheck_black_24dp_2x.png",
 			"icon_color" : "",
 			"extension" : "acfx1"
+		},
+		{
+			"app_id" : "Psnl002",
+			"title" : "ファイル抽出ツール",
+			"icon" : "image/ic_insert_drive_file_black_24dp_2x.png",
+			"icon_color" : "",
+			"extension" : "acfx2"
 		}
 	],
 	"drivers" : [

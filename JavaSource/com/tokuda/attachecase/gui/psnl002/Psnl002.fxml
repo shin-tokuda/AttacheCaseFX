@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tokuda.attachecase.gui.psnl002.Psnl002Controller">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" />
+   </rowConstraints>
+   <children>
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="label01" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" styleClass="title" text="Label" />
+            <JFXTextField fx:id="text01" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+            <JFXButton fx:id="button01" maxWidth="1.7976931348623157E308" onAction="#onClickButton01" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <JFXTextArea fx:id="text02" maxWidth="1.7976931348623157E308" minHeight="0.0" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+      <JFXButton fx:id="button02" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#onClickButton02" styleClass="positive" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+   </children>
+</GridPane>

@@ -1,5 +1,5 @@
 .contents GridPane {
 	-fx-hgap: 4;
 	-fx-vgap: 4;
-	-fx-padding: 4 4 4 4;
+	-fx-padding: 4 0 4 4;
 }

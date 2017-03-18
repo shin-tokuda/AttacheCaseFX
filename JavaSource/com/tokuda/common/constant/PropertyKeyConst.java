@@ -52,6 +52,14 @@ public enum PropertyKeyConst {
 	// "【デコード結果】{0}"
 	Psnl001_Msg_Info002("psnl001.msg.info002"),
 	// "参照"
+	Psnl002_Button01_Text("psnl002.button01.text"),
+	// "ファイル抽出"
+	Psnl002_Button02_Text("psnl002.button02.text"),
+	// "フォルダパス"
+	Psnl002_Label01_Text("psnl002.label01.text"),
+	// "コピー対象フォルダパスを入力"
+	Psnl002_Text01_Prompt("psnl002.text01.prompt"),
+	// "参照"
 	Sample_Button01_Text("sample.button01.text"),
 	// "実行"
 	Sample_Button02_Text("sample.button02.text"),
