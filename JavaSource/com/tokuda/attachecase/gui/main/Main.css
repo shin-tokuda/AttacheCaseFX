@@ -94,6 +94,11 @@
 	-fx-background-color: #7986CB;
 }
 
+.contents .jfx-combo-box {
+	-jfx-focus-color: #3F51B5;
+	-jfx-unfocus-color: #3F51B5;
+}
+
 .contents .jfx-text-field {
 	-jfx-focus-color: #3F51B5;
 	-jfx-unfocus-color: #3F51B5;

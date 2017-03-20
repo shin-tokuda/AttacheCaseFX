@@ -44,6 +44,18 @@ public class Psnl001Controller extends DefaultController<Psnl001SaveDTO> {
 		button01.setText(UtilProperty.getValue(PropertyKeyConst.Psnl001_Button01_Text.getValue()));
 	}
 
+	@FXML
+	public void onClickButton01(ActionEvent event) {
+
+		if (!UtilString.isEmpty(text01.getText())) {
+			task01 = new Task01();
+			TaskManager.start(task01);
+		} else {
+			// エンコード元文字列が入力されていなければエラー。
+			new MessageDialog(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Psnl001_Msg_Err001.getValue()))).show();
+		}
+	}
+
 	@Override
 	public void open(final File file) {
 		Psnl001SaveDTO saveDTO = open(file, Psnl001SaveDTO.class);
@@ -59,18 +71,6 @@ public class Psnl001Controller extends DefaultController<Psnl001SaveDTO> {
 		setSaveDTO(new Psnl001SaveDTO(text01.getText(), text02.getText()));
 	}
 
-	@FXML
-	public void onClickButton01(ActionEvent event) {
-
-		if (!UtilString.isEmpty(text01.getText())) {
-			task01 = new Task01();
-			TaskManager.start(task01);
-		} else {
-			// エンコード元文字列が入力されていなければエラー。
-			new MessageDialog(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Psnl001_Msg_Err001.getValue()))).show();
-		}
-	}
-
 	// -----------------------------------------------------------------
 	// タスク管理
 	// -----------------------------------------------------------------
@@ -81,8 +81,6 @@ public class Psnl001Controller extends DefaultController<Psnl001SaveDTO> {
 
 		@Override
 		public Void call() {
-
-			text01.getText();
 			StringBuffer resultBuff = new StringBuffer();
 			String input = text01.getText();
 

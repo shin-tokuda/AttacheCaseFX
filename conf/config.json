@@ -25,6 +25,13 @@
 			"icon" : "image/ic_insert_drive_file_black_24dp_2x.png",
 			"icon_color" : "",
 			"extension" : "acfx2"
+		},
+		{
+			"app_id" : "Psnl003",
+			"title" : "SQL実行ツール",
+			"icon" : "image/ic_storage_black_24dp_2x.png",
+			"icon_color" : "",
+			"extension" : "acfx3"
 		}
 	],
 	"drivers" : [

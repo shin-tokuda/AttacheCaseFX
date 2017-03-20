@@ -59,6 +59,28 @@ public enum PropertyKeyConst {
 	Psnl002_Label01_Text("psnl002.label01.text"),
 	// "コピー対象フォルダパスを入力"
 	Psnl002_Text01_Prompt("psnl002.text01.prompt"),
+	// "実行"
+	Psnl003_Button01_Text("psnl003.button01.text"),
+	// "DBタイプ選択"
+	Psnl003_Combo01_Prompt("psnl003.combo01.prompt"),
+	// "DB接続URL"
+	Psnl003_Label01_Text("psnl003.label01.text"),
+	// "ユーザID"
+	Psnl003_Label02_Text("psnl003.label02.text"),
+	// "パスワード"
+	Psnl003_Label03_Text("psnl003.label03.text"),
+	// "選択したDBタイプのデフォルトURLで、DB接続URLを上書きしますか？"
+	Psnl003_Msg_Warn001("psnl003.msg.warn001"),
+	// "実行結果"
+	Psnl003_Tab01_Text("psnl003.tab01.text"),
+	// "検索結果"
+	Psnl003_Tab02_Text("psnl003.tab02.text"),
+	// "DB接続URLを入力"
+	Psnl003_Text01_Prompt("psnl003.text01.prompt"),
+	// "ユーザIDを入力"
+	Psnl003_Text02_Prompt("psnl003.text02.prompt"),
+	// "パスワードを入力"
+	Psnl003_Text03_Prompt("psnl003.text03.prompt"),
 	// "参照"
 	Sample_Button01_Text("sample.button01.text"),
 	// "実行"
