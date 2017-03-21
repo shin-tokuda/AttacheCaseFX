@@ -69,8 +69,22 @@ public enum PropertyKeyConst {
 	Psnl003_Label02_Text("psnl003.label02.text"),
 	// "パスワード"
 	Psnl003_Label03_Text("psnl003.label03.text"),
+	// "DBタイプを選択して下さい"
+	Psnl003_Msg_Err001("psnl003.msg.err001"),
+	// "SQLの整形が完了しました"
+	Psnl003_Msg_Info001("psnl003.msg.info001"),
+	// "更新がコミットされました。"
+	Psnl003_Msg_Info002("psnl003.msg.info002"),
+	// "更新がロールバックされました"
+	Psnl003_Msg_Info003("psnl003.msg.info003"),
+	// "[処理時間]{0}msec."
+	Psnl003_Msg_Info004("psnl003.msg.info004"),
+	// "[検索結果]{0}件"
+	Psnl003_Msg_Info005("psnl003.msg.info005"),
 	// "選択したDBタイプのデフォルトURLで、DB接続URLを上書きしますか？"
 	Psnl003_Msg_Warn001("psnl003.msg.warn001"),
+	// "コミットします。よろしいですか？"
+	Psnl003_Msg_Warn002("psnl003.msg.warn002"),
 	// "実行結果"
 	Psnl003_Tab01_Text("psnl003.tab01.text"),
 	// "検索結果"
