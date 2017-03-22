@@ -220,7 +220,7 @@ public class MainController extends SingletonController<BaseSaveDTO> {
 		fileList.getChildren()
 				.add(new MenuItemBox("開く", IconConst.FileOpen.getImage(), new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN), event -> {
 					FileChooser chooser = new FileChooser();
-					chooser.setTitle(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info003.getValue())));
+					chooser.setTitle(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info001.getValue())));
 					File file = chooser.showOpenDialog(SystemData.stage);
 
 					if (file != null && file.exists()) {

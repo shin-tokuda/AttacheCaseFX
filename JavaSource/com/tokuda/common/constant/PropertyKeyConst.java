@@ -31,13 +31,13 @@ public enum PropertyKeyConst {
 	Msg_Err002("msg.err002"),
 	// "処理が異常終了しました"
 	Msg_Err003("msg.err003"),
-	// "ファイルパスを入力"
+	// "対象ファイル指定"
 	Msg_Info001("msg.info001"),
-	// "フォルダパスを入力"
+	// "対象フォルダ指定"
 	Msg_Info002("msg.info002"),
-	// "対象ファイルを選択してください"
+	// "対象ファイルを指定して下さい"
 	Msg_Info003("msg.info003"),
-	// "対象フォルダを選択してください"
+	// "対象フォルダを指定して下さい"
 	Msg_Info004("msg.info004"),
 	// "処理が終了しました"
 	Msg_Info005("msg.info005"),
@@ -95,6 +95,26 @@ public enum PropertyKeyConst {
 	Psnl003_Text02_Prompt("psnl003.text02.prompt"),
 	// "パスワードを入力"
 	Psnl003_Text03_Prompt("psnl003.text03.prompt"),
+	// "指定"
+	Psnl004_Button01_Text("psnl004.button01.text"),
+	// "DB接続"
+	Psnl004_Button02_Text("psnl004.button02.text"),
+	// "DB切断"
+	Psnl004_Button03_Text("psnl004.button03.text"),
+	// "ログ検索SQLを実行"
+	Psnl004_Button04_Text("psnl004.button04.text"),
+	// "検索結果をExcel形式で出力"
+	Psnl004_Button05_Text("psnl004.button05.text"),
+	// "解析対象フォルダ"
+	Psnl004_Label01_Text("psnl004.label01.text"),
+	// "解析対象のフォルダを指定して下さい"
+	Psnl004_Msg_Err001("psnl004.msg.err001"),
+	// "SQLの整形が完了しました"
+	Psnl004_Msg_Info001("psnl004.msg.info001"),
+	// "既に解析済みのフォルダです。再解析しますか？"
+	Psnl004_Msg_Info002("psnl004.msg.info002"),
+	// "解析対象フォルダを指定"
+	Psnl004_Text01_Prompt("psnl004.text01.prompt"),
 	// "参照"
 	Sample_Button01_Text("sample.button01.text"),
 	// "実行"

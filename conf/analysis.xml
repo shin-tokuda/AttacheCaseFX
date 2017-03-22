@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysis>
+	<pattern naming="OmgUpgrader.log" tableId="OMG_LOG" encoding="MS932" breakMark=" ">
+		<column name="DATE" max="20" split=" "/>
+		<column name="PROCESS" max="100" split="; " />
+		<column name="MSG" max="100" split="" />
+	</pattern>
+</analysis>

@@ -53,7 +53,7 @@ public abstract class BaseController<T extends BaseSaveDTO> {
 		}
 
 		FileChooser chooser = new FileChooser();
-		chooser.setTitle(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info003.getValue())));
+		chooser.setTitle(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Msg_Info001.getValue())));
 		chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(appDTO.getTitle() + " (*" + extension + ")", "*" + extension));
 		File file = chooser.showSaveDialog(SystemData.stage);
 

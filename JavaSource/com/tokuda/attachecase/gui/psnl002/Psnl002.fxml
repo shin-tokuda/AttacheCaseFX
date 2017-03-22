@@ -35,7 +35,7 @@
          <children>
             <Label fx:id="label01" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" styleClass="title" text="Label" />
             <JFXTextField fx:id="text01" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
-            <JFXButton fx:id="button01" maxWidth="1.7976931348623157E308" onAction="#onClickButton01" GridPane.columnIndex="2" />
+            <JFXButton fx:id="button01" minWidth="100.0" onAction="#onClickButton01" GridPane.columnIndex="2" />
          </children>
       </GridPane>
       <JFXTextArea fx:id="text02" maxWidth="1.7976931348623157E308" minHeight="0.0" GridPane.columnSpan="3" GridPane.rowIndex="1" />

@@ -191,7 +191,7 @@ public class Psnl003Controller extends DefaultController<Psnl003SaveDTO> {
 			task01 = new Task01();
 			TaskManager.start(task01);
 		} else {
-			new MessageDialog("DBタイプを選択して下さい。").show();
+			new MessageDialog(UtilMessage.build(UtilProperty.getValue(PropertyKeyConst.Psnl003_Msg_Err001.getValue()))).show();
 		}
 	}
 

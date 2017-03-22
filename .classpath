@@ -30,5 +30,6 @@
 	<classpathentry kind="lib" path="lib/old/derby/derbyclient.jar"/>
 	<classpathentry kind="lib" path="lib/old/derby/derbynet.jar"/>
 	<classpathentry kind="lib" path="lib/old/derby/derbytools.jar"/>
+	<classpathentry kind="lib" path="lib/jdom2-2.0.6.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

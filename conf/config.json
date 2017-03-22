@@ -32,6 +32,13 @@
 			"icon" : "image/ic_storage_black_24dp_2x.png",
 			"icon_color" : "",
 			"extension" : "acfx3"
+		},
+		{
+			"app_id" : "Psnl004",
+			"title" : "ログ解析ツール",
+			"icon" : "image/ic_library_books_black_24dp_2x.png",
+			"icon_color" : "",
+			"extension" : "acfx4"
 		}
 	],
 	"drivers" : [
