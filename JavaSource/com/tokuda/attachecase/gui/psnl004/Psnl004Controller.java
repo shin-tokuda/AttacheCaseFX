@@ -351,7 +351,7 @@ public class Psnl004Controller extends DefaultController<Psnl004SaveDTO> {
 
 		@Override
 		public Void call() throws Exception {
-			FileVisitor<Path> fv = new AcFileVisitor<Path>();
+			FileVisitor<Path> fv = new FileVisitor01<Path>();
 			Files.walkFileTree(directory.toPath(), fv);
 			return null;
 		}
@@ -374,7 +374,7 @@ public class Psnl004Controller extends DefaultController<Psnl004SaveDTO> {
 			super.failed();
 		}
 
-		private class AcFileVisitor<T> extends SimpleFileVisitor<T> {
+		private class FileVisitor01<T> extends SimpleFileVisitor<T> {
 
 			@Override
 			public FileVisitResult visitFile(T f, BasicFileAttributes attribs) {

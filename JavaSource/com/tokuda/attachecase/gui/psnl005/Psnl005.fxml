@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tokuda.attachecase.gui.psnl005.Psnl005Controller">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" />
+  </rowConstraints>
+   <children>
+      <GridPane GridPane.columnSpan="2">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="label01" maxHeight="1.7976931348623157E308" styleClass="title" text="Label" />
+            <JFXTextField fx:id="text01" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+            <JFXButton fx:id="button01" onAction="#onClickButton01" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <VBox maxWidth="-Infinity" minWidth="-Infinity" spacing="8.0" GridPane.rowIndex="1">
+         <children>
+            <HBox maxWidth="1.7976931348623157E308">
+               <children>
+                  <ImageView fx:id="image01" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                  <JFXTextField fx:id="text02" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label fx:id="label02" maxWidth="1.7976931348623157E308" styleClass="title" text="Label" />
+                  <GridPane hgap="4.0" vgap="4.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXToggleButton fx:id="toggle01" GridPane.valignment="CENTER" />
+                        <JFXTextField fx:id="text03" GridPane.columnIndex="1" />
+                        <JFXTextField fx:id="text04" GridPane.columnIndex="2" />
+                        <Label fx:id="label03" text="Label" GridPane.columnIndex="3" GridPane.valignment="BOTTOM" />
+                        <JFXToggleButton fx:id="toggle02" GridPane.rowIndex="1" />
+                        <JFXTextField fx:id="text05" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <JFXTextField fx:id="text06" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="label04" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label fx:id="label05" maxWidth="1.7976931348623157E308" styleClass="title" text="Label" />
+                  <GridPane hgap="4.0" vgap="4.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                      <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXToggleButton fx:id="toggle03" />
+                        <Spinner fx:id="spinner01" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+                        <JFXComboBox fx:id="combo01" GridPane.columnIndex="2" />
+                        <Label fx:id="label06" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Label" GridPane.columnIndex="3" GridPane.valignment="BOTTOM" />
+                        <JFXToggleButton fx:id="toggle04" GridPane.rowIndex="1" />
+                        <Spinner fx:id="spinner02" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <JFXComboBox fx:id="combo02" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="label07" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <Label fx:id="label08" maxWidth="1.7976931348623157E308" styleClass="title" text="Label" />
+                  <GridPane hgap="4.0" vgap="4.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXToggleButton fx:id="toggle05" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
+                        <Label fx:id="label09" maxWidth="1.7976931348623157E308" text="Label" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
+                        <JFXToggleButton fx:id="toggle06" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.rowIndex="1" />
+                        <Label fx:id="label10" maxWidth="1.7976931348623157E308" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </VBox>
+      <TreeTableView fx:id="table01" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+      <GridPane maxHeight="-Infinity" GridPane.rowIndex="2">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+          <ColumnConstraints hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXButton fx:id="button02" maxWidth="1.7976931348623157E308" onAction="#onClickButton02" />
+            <JFXButton fx:id="button03" maxWidth="1.7976931348623157E308" onAction="#onClickButton03" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</GridPane>

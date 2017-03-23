@@ -39,6 +39,13 @@
 			"icon" : "image/ic_library_books_black_24dp_2x.png",
 			"icon_color" : "",
 			"extension" : "acfx4"
+		},
+		{
+			"app_id" : "Psnl005",
+			"title" : "ファイル検索・抽出ツール",
+			"icon" : "image/ic_search_black_24dp_2x.png",
+			"icon_color" : "",
+			"extension" : "acfx5"
 		}
 	],
 	"drivers" : [
